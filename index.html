@@ -15,7 +15,7 @@ h1{font-size:18px;margin:0 0 4px}.sub{color:var(--mut);font-size:13px;margin-bot
 .b{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:11px 18px;font:inherit;cursor:pointer;margin-right:8px}
 .b.g{background:transparent;color:var(--fg);border:1px solid var(--bd)}.b:disabled{opacity:.4}
 .ex{margin-top:12px;font-size:15px}.big{font-size:44px;font-weight:700;color:var(--ac)}
-.hero{background:linear-gradient(135deg,#0b9a8f,#0a6f68);color:#fff;border-radius:16px;padding:18px;margin-bottom:14px}.hero h1{font-size:24px;margin:4px 0 6px;color:#fff}.hero .tag{font-size:13px;opacity:.9}.sec{font-weight:600;margin:6px 0 8px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.list{display:grid;gap:10px}.tile{background:var(--card);color:var(--fg);border:1px solid var(--bd);border-radius:14px;padding:14px;font:inherit;cursor:pointer;text-align:center}.tile .e{display:block;font-size:30px}.tile b{display:block}.tile small{display:block;color:var(--mut);font-size:13px}.tile.row{display:flex;align-items:center;gap:14px;text-align:left}.tile.row .e{font-size:28px}.tile.on{border-color:var(--ac);box-shadow:0 0 0 2px var(--ac) inset}</style></head><body><main id="a"></main>
+.hero{background:linear-gradient(135deg,#0b9a8f,#0a6f68);color:#fff;border-radius:16px;padding:18px;margin-bottom:14px}.hero h1{font-size:24px;margin:4px 0 6px;color:#fff}.hero .tag{font-size:13px;opacity:.9}.sec{font-weight:600;margin:6px 0 8px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.list{display:grid;gap:10px}.tile{background:var(--card);color:var(--fg);border:1px solid var(--bd);border-radius:14px;padding:14px;font:inherit;cursor:pointer;text-align:center}.tile .e{display:block;font-size:30px}.tile b{display:block}.tile small{display:block;color:var(--mut);font-size:13px}.tile.row{display:flex;align-items:center;gap:14px;text-align:left}.tile.row .e{font-size:28px}.tile.on{border-color:var(--ac);box-shadow:0 0 0 2px var(--ac) inset}.tile small.pg,.pgx{color:var(--ac);font-weight:600}.pgx{margin:4px 0 12px}.pgc{margin-top:10px}</style></head><body><main id="a"></main>
 <script>
 const D={am:(()=>{const C1="Élève G.G.D, 16 ans, a eu une aventure sexuelle pendant les vacances. Motif de consultation : brûlure mictionnelle avec dysurie et plaie au niveau du pénis.";
 const C2="Garde à l'EPHD de Toulépleu : Sieur T.R, vendeur et consommateur de noix de cola. Douleur rétro-sternale à l'effort, irradiant à la mâchoire inférieure et au bras gauche, en étau, 1 à 3 min, cède à l'arrêt de l'effort. T° 36,8°C, poids 62 kg, IMC 28, pouls 88, FR 31, TA 172/101 mmHg. Tabagisme notoire, noix de cola (haleine fétide, dents ardoisées). Trinitrine en urgence : la crise cesse. Sonde urinaire ; diurèse du lendemain : 555 cc.";
@@ -544,5 +544,33 @@ function rev(){
 function end(){
  a.innerHTML=H(ttl)+`<div class="card" style="text-align:center"><div>Ton score</div><div class="big">${s} / ${Qs.length}</div><p>Soit ${(s/Qs.length*20).toFixed(1)} / 20</p><p class="sub">Corrigé établi par Claude : à vérifier avec ton enseignant.</p><button class="b" onclick="again()">Recommencer</button>${W.length?`<button class="b" onclick="rev()">Revoir mes erreurs (${W.length})</button>`:""}<button class="b g" onclick="menu()">Menu</button></div>`;
 }
+/* ---- Ma progression : enregistrée sur l'appareil (localStorage), sans toucher au moteur ---- */
+const PK="monde_progress_v1";
+let PG={};try{PG=JSON.parse(localStorage.getItem(PK)||"{}")||{}}catch(e){PG={}}
+function pgSave(){try{localStorage.setItem(PK,JSON.stringify(PG))}catch(e){}}
+const pgF=x=>(Math.round(x*10)/10).toFixed(1).replace(".",",");
+function pgAll(){const k=new Set();Object.values(M).forEach(l=>l.forEach(x=>x[1]&&D[x[1]]&&k.add(x[1])));Object.values(AN).forEach(y=>Object.values(y).forEach(l=>l.forEach(x=>D[x[1]]&&k.add(x[1]))));return[...k]}
+let pgK=null,pgRec=false,pgNew=false,pgArm=false;
+const _go=go;go=function(k,t){pgK=k;pgRec=false;_go(k,t)};
+const _sq=sq;sq=function(){pgK=null;pgRec=false;_sq()};
+const _end=end;end=function(){_end();if(!pgK||!Qs||!Qs.length)return;
+ if(!pgRec){pgRec=true;const n=s/Qs.length*20,e=PG[pgK]||{t:0,best:-99};pgNew=e.t>0&&n>e.best;
+  e.t++;e.last=n;e.best=Math.max(e.best,n);e.d=Date.now();PG[pgK]=e;pgSave()}
+ const e=PG[pgK],p=a.querySelector(".card p");
+ if(p)p.insertAdjacentHTML("afterend",`<p class="pgx">${pgNew?"🏆 Nouveau record !":e.t==1?"✅ Sujet ajouté à ta progression":"Meilleur score : "+pgF(e.best)+" / 20"} · tentative n° ${e.t}</p>`)};
+function pgBadge(b,t){const sm=b.querySelector("small");if(sm)sm.insertAdjacentHTML("afterend",`<small class="pg">${t}</small>`)}
+function pgGroup(b,keys){const d=keys.filter(k=>PG[k]).length;if(d)pgBadge(b,`✅ ${d} / ${keys.length} fait${d>1?"s":""}`)}
+function pgDecorate(){a.querySelectorAll("button.tile").forEach(b=>{const oc=b.getAttribute("onclick")||"";let m;
+ if(m=oc.match(/^go\('(\w+)'/)){const e=PG[m[1]];if(e)pgBadge(b,`✅ Meilleur : ${pgF(e.best)} / 20 · ${e.t} fois`)}
+ else if(m=oc.match(/^subj\('([^']+)'\)/)){if(M[m[1]])pgGroup(b,M[m[1]].filter(x=>x[1]).map(x=>x[1]))}
+ else if(m=oc.match(/^om\('([^']+)','([^']+)'\)/)){if(AN[m[1]]&&AN[m[1]][m[2]])pgGroup(b,AN[m[1]][m[2]].map(x=>x[1]))}
+ else if(m=oc.match(/^oa\('([^']+)'\)/)){if(AN[m[1]])pgGroup(b,Object.values(AN[m[1]]).flat().map(x=>x[1]))}})}
+function pgCard(armed){const all=pgAll(),done=all.filter(k=>PG[k]),n=done.length;
+ const moy=n?done.reduce((t,k)=>t+PG[k].best,0)/n:0;
+ return `<div class="card pgc"><div class="sec">📈 Ma progression</div>`+(n?`<div>${n} / ${all.length} sujets terminés</div><div class="bar"><i style="width:${n/all.length*100}%"></i></div><div>Moyenne de tes meilleurs scores : <b>${pgF(moy)} / 20</b></div>`:`<div>Aucun sujet terminé pour l'instant. Va jusqu'au score d'un sujet pour le voir ici.</div>`)+
+ `<div class="sub" style="margin:8px 0 0">Enregistré sur cet appareil uniquement.</div>`+(n?`<p style="margin-bottom:0"><button class="b g" id="pgr">${armed?"Confirmer : tout effacer":"Effacer ma progression"}</button></p>`:"")+`</div>`}
+
+["subj","oy","oa","om"].forEach(f=>{const o=window[f];window[f]=function(...r){o(...r);pgDecorate()}});
+const _menu=menu;menu=function(){const armed=pgArm;pgArm=false;_menu();pgDecorate();a.insertAdjacentHTML("beforeend",pgCard(armed));const r=document.getElementById("pgr");if(r)r.onclick=()=>{if(armed){PG={};pgSave()}else pgArm=true;menu()}};
 menu();
 </script></body></html>
