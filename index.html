@@ -15,7 +15,9 @@ h1{font-size:18px;margin:0 0 4px}.sub{color:var(--mut);font-size:13px;margin-bot
 .b{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:11px 18px;font:inherit;cursor:pointer;margin-right:8px}
 .b.g{background:transparent;color:var(--fg);border:1px solid var(--bd)}.b:disabled{opacity:.4}
 .ex{margin-top:12px;font-size:15px}.big{font-size:44px;font-weight:700;color:var(--ac)}
-.hero{background:linear-gradient(135deg,#0b9a8f,#0a6f68);color:#fff;border-radius:16px;padding:18px;margin-bottom:14px}.hero h1{font-size:24px;margin:4px 0 6px;color:#fff}.hero .tag{font-size:13px;opacity:.9}.sec{font-weight:600;margin:6px 0 8px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.list{display:grid;gap:10px}.tile{background:var(--card);color:var(--fg);border:1px solid var(--bd);border-radius:14px;padding:14px;font:inherit;cursor:pointer;text-align:center}.tile .e{display:block;font-size:30px}.tile b{display:block}.tile small{display:block;color:var(--mut);font-size:13px}.tile.row{display:flex;align-items:center;gap:14px;text-align:left}.tile.row .e{font-size:28px}.tile.on{border-color:var(--ac);box-shadow:0 0 0 2px var(--ac) inset}.tile small.pg,.pgx{color:var(--ac);font-weight:600}.pgx{margin:4px 0 12px}.pgc{margin-top:10px}</style></head><body><main id="a"></main>
+.hero{background:linear-gradient(135deg,#0b9a8f,#0a6f68);color:#fff;border-radius:16px;padding:18px;margin-bottom:14px}.hero h1{font-size:24px;margin:4px 0 6px;color:#fff}.hero .tag{font-size:13px;opacity:.9}.sec{font-weight:600;margin:6px 0 8px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.list{display:grid;gap:10px}.tile{background:var(--card);color:var(--fg);border:1px solid var(--bd);border-radius:14px;padding:14px;font:inherit;cursor:pointer;text-align:center}.tile .e{display:block;font-size:30px}.tile b{display:block}.tile small{display:block;color:var(--mut);font-size:13px}.tile.row{display:flex;align-items:center;gap:14px;text-align:left}.tile.row .e{font-size:28px}.tile.on{border-color:var(--ac);box-shadow:0 0 0 2px var(--ac) inset}.tile small.pg,.pgx{color:var(--ac);font-weight:600}.pgx{margin:4px 0 12px}.pgc{margin-top:10px}
+.frac{display:inline-flex;vertical-align:middle;flex-direction:column;text-align:center;line-height:1.15;margin:0 .12em}.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 .18em .08em}.frac>span:last-child{padding:.08em .18em 0}
+</style></head><body><main id="a"></main>
 <script>
 const D={am:(()=>{const C1="Élève G.G.D, 16 ans, a eu une aventure sexuelle pendant les vacances. Motif de consultation : brûlure mictionnelle avec dysurie et plaie au niveau du pénis.";
 const C2="Garde à l'EPHD de Toulépleu : Sieur T.R, vendeur et consommateur de noix de cola. Douleur rétro-sternale à l'effort, irradiant à la mâchoire inférieure et au bras gauche, en étau, 1 à 3 min, cède à l'arrêt de l'effort. T° 36,8°C, poids 62 kg, IMC 28, pouls 88, FR 31, TA 172/101 mmHg. Tabagisme notoire, noix de cola (haleine fétide, dents ardoisées). Trinitrine en urgence : la crise cesse. Sonde urinaire ; diurèse du lendemain : 555 cc.";
@@ -147,17 +149,17 @@ const Q=[
 ["Mécanisme → agent d'étranglement (3 réponses). 1 obstruction, 2 strangulation, 3 paralysie. a fécalome, b invagination, c volvulus, d tumeur, e hypokaliémie.",["1 → d","2 → c","1 → b","3 → e","3 → d","2 → a"],"ABD","Tumeur = obstruction ; volvulus = strangulation ; hypokaliémie = paralysie."],
 ["Complications immédiates des fractures (3 réponses) :",["Lésions vasculaires","Cals vicieux","Pseudarthrose","Choc hypovolémique","Lésions nerveuses","Ankylose"],"ADE","Cals vicieux, pseudarthrose et ankylose sont des complications tardives."],
 ["Diagnostic positif de l'appendicite aiguë, 3 éléments :",["Céphalées","Douleurs fosse iliaque droite","Hématurie terminale","Recherche des douleurs provoquées","Pollakiurie","Hyperleucocytose à la NFS"],"BDF",""],
-["Fractures du fémur : type → trait (3 réponses). Types : 1 col, 2 trochanter, 3 diaphyse. Traits : a oblique bas en dedans, b transversal horizontal et vertical, c transversal/oblique avec 3e fragment.",["1 → c","1 → b","3 → a","2 → a","2 → b","3 → c"],"EF","Énoncé ambigu (3 réponses annoncées, 2 appariements exacts d'après l'ordre des traits). À vérifier."],
+["Fractures du fémur : type → trait (3 réponses). Types : 1 col, 2 trochanter, 3 diaphyse. Traits : a oblique bas en dedans, b transversal horizontal et vertical, c transversal/oblique avec 3e fragment.",["1 → c","1 → b","3 → a","2 → a","2 → b","3 → c"],"BDF"],
 ["Traumatisé du bassin : associations symptôme → lésion qui ne sont PAS vraies (2 réponses). 1 urine beaucoup, urines claires → a rupture vésicale / b aucun organe touché ; 2 urines sanguinolentes → d contusion rénale probable ; 3 n'urine pas, globe vésical → c rupture de l'urètre ; 4 peu ou pas d'urine, pas de globe → a rupture vésicale.",["1 → b","2 → d","4 → a","2 → b","3 → c","3 → a"],"DF","Urines sanguinolentes : contusion rénale ; globe vésical : rupture de l'urètre, pas de la vessie."],
 ["Signes faisant suspecter un syndrome de Volkmann (3 réponses) :",["Sueurs froides","Œdème des extrémités","Cyanose","Tachycardie","Insensibilité du membre atteint","Pouls rapide, filant et imprenable"],"BCE","Syndrome des loges : œdème, cyanose, insensibilité."],
 ["Traumatisé du crâne : n'ouvre pas les yeux (1), sons incompréhensibles (2), extension à la douleur (2). Type de coma :",["Traumatisme crânien modéré","Traumatisme crânien dépassé","Traumatisme crânien grave","Traumatisme crânien bénin"],"C","Score 5 : TC grave (3 à 8)."],
-["Fractures du fémur, matin de l'intervention : 3 activités de l'infirmier.",["Préparation psychologique","Administrer l'anesthésique","Bilan préopératoire complet","Sonder le client sur prescription","Prévenir le chirurgien en cas de fièvre","Accompagner le client au bloc avec son dossier"],"DEF","À vérifier avec ton cours."],
+["Fractures du fémur, matin de l'intervention : 3 activités de l'infirmier.",["Préparation psychologique","Administrer l'anesthésique","Bilan préopératoire complet","Sonder le client sur prescription","Prévenir le chirurgien en cas de fièvre","Accompagner le client au bloc avec son dossier"],"DEF"],
 ["Attitude de Desault (membre supérieur), 3 signes :",["Épaule abaissée, projetée en avant, rapprochée de la ligne médiane","Abduction du bras et rotation externe","Tête inclinée du côté atteint, bras collé au corps","Aplatissement du moignon de l'épaule","Avant-bras semi-fléchi, soutenu par la main opposée","Crépitation osseuse"],"ACE",""],
-["3 complications immédiates des polytraumatismes :",["Complications urinaires","Hémorragies","Nécrose ischémique","Coxarthrose","Fractures associées","Ankylose"],"ABE","À vérifier."],
+["3 complications immédiates des polytraumatismes :",["Complications urinaires","Hémorragies","Nécrose ischémique","Coxarthrose","Fractures associées","Ankylose"],"ABE"],
 ["3 gestes sur les lieux d'un accident :",["Faire la prémédication","Baliser les lieux pour protéger le blessé","Transporter le blessé dans votre véhicule","Mettre en route une perfusion","Position latérale de sécurité","Immobilisation provisoire"],"BEF",""],
-["3 indications du drainage :",["Dilatation des bronches","Appendicite aiguë","Méningite purulente","Cancer de la vessie","Pleurésies purulentes","Cavités infectées"],"BEF","À vérifier."],
+["3 indications du drainage :",["Dilatation des bronches","Appendicite aiguë","Méningite purulente","Cancer de la vessie","Pleurésies purulentes","Cavités infectées"],"AEF",""],
 ["3 contre-indications de la transfusion sanguine :",["Hypertension artérielle","Diabète","Insuffisance rénale","Anémie chronique","Insuffisance cardiaque","Œdème aigu du poumon"],"CEF","Risque de surcharge circulatoire."],
-["Surveillance d'un drainage, 3 activités :",["Vérifier la perméabilité du drain","Vider le bocal quotidiennement à heure fixe","Surveiller l'abondance de l'écoulement","Surveiller l'abondance et noter la quantité sur la feuille","Surveiller les paramètres vitaux","Vérifier la dépression d'aspiration et la régler"],"ADF","À vérifier."],
+["Surveillance d'un drainage, 3 activités :",["Vérifier la perméabilité du drain","Vider le bocal quotidiennement à heure fixe","Surveiller l'abondance de l'écoulement","Surveiller l'abondance et noter la quantité sur la feuille","Surveiller les paramètres vitaux","Vérifier la dépression d'aspiration et la régler"],"ADF",""],
 ["Préparation psychologique avant l'intervention, 3 tâches :",["Évaluer l'état physique, nutritionnel et biologique","Rassurer et mettre en confiance","Prévenir et lutter contre l'infection","Procéder à la prémédication","Dissiper ses craintes de l'intervention ou de la mort","Lui donner tous les détails de l'intervention"],"BEF",""],
 ["2 complications courantes de la péritonite :",["Hémorragie intra-abdominale","Occlusion abdominale","Septicémie","Ulcère gastroduodénal","Pancréatite aiguë","Salpingite"],"BC",""],
 ["Opéré en salle d'hospitalisation, 3 tâches :",["Surveillance des paramètres","Évaluer l'état physique, nutritionnel et biologique","Préparer le champ opératoire","Administrer le traitement prescrit","Préparer psychologiquement la cliente","Surveiller la plaie opératoire et les drains"],"ADF",""],
@@ -168,21 +170,21 @@ const Q=[
 ["Signes fonctionnels des traumatismes crânio-encéphaliques (3) :",["Perte de connaissance initiale ou coma d'emblée","Plaie","Douleur","Ecchymose","Amnésie","Hématome"],"ACE","Plaie, ecchymose et hématome sont des signes physiques."],
 ["Traumatisme crânien modéré : score de Glasgow de :",["9 à 12","13 à 15","3 à 8"],"A","Classification retenue : modéré 9-12, léger 13-15, grave 3-8."],
 ["Deux bonnes affirmations :",["La monoplégie est la présence de mouvement d'intensité moindre","La paraplégie est une paralysie des deux membres inférieurs","La tétraplégie est une paralysie des quatre membres","La parésie est une présence de mouvement"],"BC",""],
-["Hémorragie cérébrale → intervalle libre (3 réponses). 1 épidurale, 2 sous-durale, 3 intracrânienne. a long, b bref, c absence.",["3 → c","2 → a","1 → a","2 → b","1 → b","3 → b"],"ABE","À vérifier."],
+["Hémorragie cérébrale → intervalle libre (3 réponses). 1 épidurale, 2 sous-durale, 3 intracrânienne. a long, b bref, c absence.",["3 → c","2 → a","1 → a","2 → b","1 → b","3 → b"],"ABE",""],
 ["Hémorragie cérébrale → origine du sang (3 réponses). 1 épidurale, 2 sous-durale, 3 intracrânienne. a sang artériel méningé, b sang veineux, c pétéchies ou gros hématomes.",["3 → c","2 → a","1 → a","2 → b","1 → b","3 → b"],"ACD","Épidurale : artère méningée ; sous-durale : veines."],
 ["Meilleure réponse verbale du Glasgow : cochez les deux exceptions.",["Confuse","Spontanée","Appropriée","Flexion anormale","Incohérente","Incompréhensible"],"BD","Spontanée = ouverture des yeux ; flexion anormale = réponse motrice."],
 ["Quantité de solutés le 1er jour selon Baxter :",["4000 ml","6000 ml","8000 ml","12000 ml"],"C","4 ml × 57 kg × 35 % ≈ 8000 ml ; 8000 + 4000 = 12 000 ml sur 2 jours.",C],
 ["Quantité de solutés le 2e jour selon Baxter :",["4000 ml","6000 ml","8000 ml","12000 ml"],"A","Moitié de la quantité du 1er jour.",C],
 ["Poids de M. TINTO :",["28 kg","57 kg","85 kg","42 kg"],"B","8000 / (4 × 35) = 57 kg.",C],
-["1er jour : quantités de macromolécules, de glucosé et de bicarbonate 14‰ (3 réponses) :",["3000 ml","2000 ml","6000 ml","8000 ml","4000 ml","1000 ml"],"ABF","Répartition non précisée dans le sujet : à vérifier avec ton cours.",C],
+["1er jour : quantités de macromolécules, de glucosé et de bicarbonate 14‰ (3 réponses) :",["3000 ml","2000 ml","6000 ml","8000 ml","4000 ml","1000 ml"],"AEF","",C],
 ["Débit du SGI 5 % au 2e jour (2000 ml en 8 h) :",["62 gttes/mn","83 gttes/mn","160 gttes/mn","46 gttes/mn"],"B","2000 × 20 / 480 ≈ 83 gouttes/min.",C],
 ["Hb de 5 à 10 g/dl : quantité de sang selon le type disponible (2 réponses) :",["855 ml","1050 ml","3000 ml","1800 ml","2800 ml","1710 ml"],"AF","Δ Hb 5 × 57 kg × 3 = 855 ml (culot globulaire) ; × 6 = 1710 ml (sang total).",C],
 ["Débits de la transfusion en 2 h 30 selon le sang utilisé (2 réponses) :",["171 gttes/mn","100 gttes/mn","85 gttes/mn","70 gttes/mn","280 gttes/mn","140 gttes/mn"],"AC","855 × 15 / 150 ≈ 85 ; 1710 × 15 / 150 = 171.",C],
-["Chiffre de pronostic vital selon la loi de Baux :",["72","107","92","84"],"C","Âge + % de surface brûlée = 57 + 35 = 92.",C],
-["Pronostic vital selon la loi de Baux :",["Guérison certaine","Mort quasi-certaine","50 % de chance de guérir ou de mourir"],"C","Un chiffre proche de 100 correspond à environ 50 % de mortalité. À vérifier.",C],
+["Chiffre de pronostic vital selon la loi de Baux :",["72","107","92","84"],"C","Âge + % de surface brûlée + tare = 57 + 35 + 15 = 107.",C],
+["Pronostic vital selon la loi de Baux :",["Guérison certaine","Mort quasi-certaine","50 % de chance de guérir ou de mourir"],"B","",C],
 ["3 signes cardinaux de l'hypertrophie prostatique :",["Anorexie","Pollakiurie","Dysurie","Céphalées","Rétention d'urine","Diarrhées"],"BCE","",C],
-["Diagnostics infirmiers liés à la maladie et à la situation sociale (2 réponses) :",["Besoin de respirer","Besoin de manger et boire","Besoin d'éviter le danger","Besoin d'apprendre","Besoin de s'occuper de façon à se sentir utile","Besoin de se recréer"],"CE","À vérifier.",C],
-["Diagnostics infirmiers : besoins non satisfaits liés à la prostatite (3 réponses) :",["Impossibilité de se mouvoir due à la douleur","Impossibilité d'émettre les urines liée à la rétention aiguë","Trouble du sommeil relié à la pollakiurie","Perturbation de la fonction nutritionnelle","Prédisposition aux infections par pertes incontrôlées d'urines","Risque de coma dû à l'adénome"],"ABC","À vérifier.",C],
+["Diagnostics infirmiers liés à la maladie et à la situation sociale (2 réponses) :",["Besoin de respirer","Besoin de manger et boire","Besoin d'éviter le danger","Besoin d'apprendre","Besoin de s'occuper de façon à se sentir utile","Besoin de se recréer"],"CE","",C],
+["Diagnostics infirmiers : besoins non satisfaits liés à la prostatite (3 réponses) :",["Impossibilité de se mouvoir due à la douleur","Impossibilité d'émettre les urines liée à la rétention aiguë","Trouble du sommeil relié à la pollakiurie","Perturbation de la fonction nutritionnelle","Prédisposition aux infections par pertes incontrôlées d'urines","Risque de coma dû à l'adénome"],"ABC","",C],
 ["Traumatisme crânien avec signe neurologique ou plaie pénétrante : scanner obligatoire d'emblée.",T,"A",""],
 ["Yeux ouverts spontanément, retrait au piqûre, réponse verbale appropriée : Glasgow de :",["12","13"],"B","4 + 4 + 5 = 13."],
 ["Traumatisme crânien grave : Glasgow inférieur à 9 après correction des fonctions vitales.",T,"A",""],
@@ -191,7 +193,7 @@ const Q=[
 ["L'abcès chaud est causé par le bacille de Koch.",T,"B","Le bacille de Koch donne l'abcès froid."],
 ["Aplatissement du moignon de l'épaule avec coup de hache externe : signe de l'épaulette dans les luxations de l'épaule.",T,"A",""],
 ["La fracture de Pouteau-Colles est une fracture de la partie distale du radius.",T,"A",""],
-["L'ostéosynthèse se pratique sous anesthésie générale.",T,"A","À vérifier (rachianesthésie possible)."],
+["L'ostéosynthèse se pratique sous anesthésie générale.",T,"A",""],
 ["Hernie étranglée : tuméfaction dure, irréductible, tendue, expansive et impulsive à la toux.",T,"B","Elle n'est ni expansive ni impulsive à la toux."],
 ["La cryptorchidie est l'épanchement liquidien séreux entre les deux feuillets de la vaginale.",T,"B","C'est l'hydrocèle ; la cryptorchidie est l'absence de testicule dans les bourses."],
 ["Dénivellation en marche d'escalier avec douleur exquise : signe d'une fracture de l'humérus.",T,"B","Ce signe évoque la fracture de la clavicule. À vérifier."],
@@ -490,7 +492,7 @@ const M={"Abidjan":[["Médecine","am"],["Pédiatrie","ap"],["Santé publique","a
 const a=document.getElementById("a"),L="ABCDEF";
 let Qs,TF,ttl,i,s,sel,done,W=[],again,qm="",qn=20;
 const H=t=>`<h1>DE blanc – INFAS${t?" · "+t:""}</h1>`;
-function menu(){a.innerHTML=`<div class="hero"><div class="tag">📢 Sujets D.E blanc 2026</div><h1>MON D.E · Sujets</h1><div>Entraîne-toi par antenne et par matière, avec la correction après chaque question.</div></div><div class="sec">🏫 Choisis ton antenne</div><div class="grid">`+Object.keys(M).map(k=>`<button class="tile" onclick="subj('${k}')"><span class="e">🏥</span><b>${k}</b><small>${M[k].filter(x=>x[1]).length} sujets · ${M[k].reduce((n,x)=>n+(x[1]?D[x[1]].Q.length:0),0)} questions</small></button>`).join("")+`</div><button class="tile row" style="width:100%;margin-top:10px" onclick="qz()"><span class="e">🎲</span><span><b>Quiz personnalisé</b><small>Choisis la matière et le nombre de questions</small></span></button><button class="tile row" style="width:100%;margin-top:10px" onclick="oy()"><span class="e">📚</span><span><b>Ancien D.E</b><small>Année, antenne, puis matière</small></span></button>`}
+function menu(){a.innerHTML=`<div class="hero"><div class="tag">📢 Sujets D.E blanc 2026</div><h1>MON D.E · Sujets</h1><div>Entraîne-toi par antenne et par matière, avec la correction après chaque question.</div></div><div class="sec">🏫 Choisis ton antenne</div><div class="grid">`+Object.keys(M).map(k=>`<button class="tile" onclick="subj('${k}')"><span class="e">🏥</span><b>${k}</b><small>${M[k].filter(x=>x[1]).length} sujets · ${M[k].reduce((n,x)=>n+(x[1]?D[x[1]].Q.length:0),0)} questions</small></button>`).join("")+`</div><button class="tile row" style="width:100%;margin-top:10px" onclick="qz()"><span class="e">🎲</span><span><b>Quiz personnalisé</b><small>Choisis la matière et le nombre de questions</small></span></button><button class="tile row" style="width:100%;margin-top:10px" onclick="openFormulaQuiz()"><span class="e">🧮</span><span><b>Formules de santé publique</b><small>Quiz dédié · 66 questions</small></span></button><button class="tile row" style="width:100%;margin-top:10px" onclick="oy()"><span class="e">📚</span><span><b>Ancien D.E</b><small>Année, antenne, puis matière</small></span></button>`}
 const em=n=>/Toutes/.test(n)?"🎲":/Méd/.test(n)?"🩺":/Péd/.test(n)?"👶":/publique/.test(n)?"🧮":"🩹";
 function subj(k){a.innerHTML=`<div class="hero"><div class="tag">🏥 Antenne de ${k}</div><h1>Choisis la matière</h1></div><div class="list">`+M[k].filter(x=>x[1]).map(x=>`<button class="tile row" onclick="go('${x[1]}','${k} – ${x[0]}')"><span class="e">${em(x[0])}</span><span><b>${x[0]}</b><small>${D[x[1]].Q.length} questions</small></span></button>`).join("")+`</div><p><button class="b g" onclick="menu()">← Retour</button></p>`}
 const ft=j=>Qs[j]&&Qs[j][5]!==undefined?Qs[j][5]:typeof TF=="function"?TF(j):j<TF;function go(k,t){Qs=D[k].Q;TF=D[k].tf;ttl=t;i=0;s=0;W=[];again=()=>go(k,t);show()}
@@ -585,4 +587,95 @@ function pgCard(armed){const all=pgAll(),done=all.filter(k=>PG[k]),n=done.length
 ["subj","oy","oa","om"].forEach(f=>{const o=window[f];window[f]=function(...r){o(...r);pgDecorate()}});
 const _menu=menu;menu=function(){const armed=pgArm;pgArm=false;_menu();pgDecorate();a.insertAdjacentHTML("beforeend",pgCard(armed));const r=document.getElementById("pgr");if(r)r.onclick=()=>{if(armed){PG={};pgSave()}else pgArm=true;menu()}};
 menu();
+</script><script>
+(function(){
+
+// ["v", énoncé, 1 vrai / 0 faux, explication] ou ["q", énoncé à compléter, [bonne réponse, autres...], explication]
+const Q=[
+["v","La population cible des enfants de 0 à 11 mois représente 4 % de la population totale.",1,"PC = 4 % × Pt, donc Pt = PC / 0,04."],
+["v","Les enfants de 0 à 5 ans représentent 45 % de la population totale.",0,"Ils représentent 20 % : PC = 20 % × Pt."],
+["v","Les enfants de 1 à 4 ans représentent 17,32 % de la population totale.",1,"PC = 17,32 % × Pt."],
+["v","Les femmes enceintes représentent 5 % de la population totale.",1,"PC = 5 % × Pt, donc Pt = PC / 0,05."],
+["v","Les naissances attendues représentent 5 % de la population totale.",0,"Elles représentent 3,5 % : PC = 3,5 % × Pt."],
+["v","Les femmes en âge de reproduction (FAR) représentent 20 % de la population totale.",1,"FAR = 20 % × Pt."],
+["v","Le taux brut de natalité = naissances vivantes en 1 an / population totale × 100.",1,"TBN = naissances vivantes en 1 an / pop totale × 100."],
+["v","Le taux brut de morbidité = effectif des décès / population totale × 100.",0,"Morbidité : effectif des malades. Les décès concernent la mortalité."],
+["v","L'équation de projection s'écrit Pt = P0 (1 + r)^t.",1,"P0 population de départ, r le TAA, t le temps."],
+["v","Équation fondamentale : Pt = P0 + (Naissances + Décès) + (Immigrés − Émigrés).",0,"Pt = P0 + (Naissances − Décès) + (Immigrés − Émigrés)."],
+["v","La population moyenne = (population de départ + population d'arrivée) / 2.",1,"PopM = (Pop de départ + Pop d'arrivée) / 2."],
+["v","Le taux général de fécondité = naissances vivantes / population totale × 100.",0,"TGF = naissances vivantes dans l'année / nombre de FAR de l'année × 100."],
+["v","Le taux d'accroissement naturel = taux brut de natalité − taux brut de mortalité.",1,"TAN = (Naissances − Décès) / pop début d'année × 100 = TBN − TBM."],
+["v","TAA = (population de départ − population d'arrivée) / population de départ × 100.",0,"TAA = (Pop d'arrivée − Pop de départ) / Pop de départ × 100 ; r = Pt/P0 − 1."],
+["v","Le taux d'accouchement assisté = femmes assistées pendant l'accouchement / accouchements attendus la même année × 100.",1,"C'est la formule de la fiche."],
+["v","Le taux d'incidence = nouveaux cas de maladie / population totale × 100.",1,"Incidence : nouveaux cas seulement."],
+["v","Le taux de prévalence tient compte uniquement des nouveaux cas.",0,"Prévalence = anciens + nouveaux cas / pop totale × 100."],
+["v","Le taux de mortalité infantile = décès de 0 à 28 jours / naissances vivantes.",0,"TMI : décès de 0 à 11 mois / naissances vivantes. Les 28 jours concernent la mortalité néonatale."],
+["v","La mortalité néonatale précoce concerne les décès de 0 à moins de 8 jours.",1,"TMNP = décès de 0 à moins de 8 jours / naissances vivantes."],
+["v","La mortalité néonatale tardive concerne les décès de 28 jours à 11 mois.",0,"TMNT : 8 à moins de 28 jours. De 28 jours à 11 mois : mortalité post-néonatale."],
+["v","Le temps de dédoublement TD = 70 / TAA.",1,"TD = 70 / TAA."],
+["v","L'année de dédoublement AD = AR × TD.",0,"AD = AR + TD (AR : année de référence)."],
+["v","Le stock de sécurité en vaccin vaut 25 % du besoin théorique.",1,"SS = BT × 25 / 100."],
+["v","Le stock de sécurité en consommables vaut 25 % du besoin théorique.",0,"Pour les consommables : SS = BT × 10 / 100."],
+["v","Le besoin réel BR = BT + SS.",1,"BR = BT + SS."],
+["v","La quantité à commander QC = BR + quantité en stock.",0,"QC = BR − quantité en stock."],
+["v","Le taux de perte TP = 100 − TU.",1,"TP = (doses sorties − doses administrées) / doses sorties × 100 = 100 − TU."],
+["v","Le facteur de pertes FP = 100 − taux de pertes.",0,"FP = 100 / (100 − taux de pertes)."],
+["v","Le taux d'abandon global = (Penta 1 − RR) / Penta 1.",1,"TAG = (Penta 1 − RR) / Penta 1."],
+["v","Le taux d'abandon spécifique du penta = (Penta 1 − Penta 3) / Penta 3.",0,"TAS = (Penta 1 − Penta 3) / Penta 1."],
+["v","On prévoit une boîte de sécurité pour 100 seringues.",1,"1 boîte de sécurité pour 100 seringues."],
+["v","On prévoit une seringue à dilution par dose de vaccin.",0,"Une seringue à dilution par flacon de vaccin à reconstituer. Seringues à injection = nombre de doses."],
+["v","Fonds de réserve : FR = SB + intérêts − agios.",1,"SB : somme à la banque à la veille du monitorage."],
+["v","La somme à budgétiser SAB = RVME + RCAS.",1,"RVME : médicaments essentiels ; RCAS : coût des actes de santé. Aussi SAB = DO + DFL."],
+["v","Les imprévus représentent 10 % des dépenses de fonctionnement local (DFL).",0,"Imprévus : 5 % DFL ; immeuble : 10 % DFL ; autres dépenses : 85 % DFL."],
+["v","L'intéressement du personnel = 15 % des recettes brutes.",1,"IP = 15 % × recettes brutes."],
+["v","Les ressources propres RP = recettes brutes + total des dépenses du centre.",0,"RP = recettes brutes − TDC."],
+["q","TMNP = décès de 0 à … / naissances vivantes",["moins de 8 jours","28 jours","11 mois","1 an"],"Néonatale précoce : moins de 8 jours."],
+["q","TAN = TBN …",["− TBM","+ TBM","× TBM","/ TBM"],"TAN = TBN − TBM."],
+["q","FP = 100 / …",["(100 − taux de pertes)","taux de pertes","(100 + taux de pertes)","TU × 100"],"FP = 100 / (100 − taux de pertes)."],
+["q","BT = Pop cible × objectif vaccinal × nombre de contacts × FP × période / …",["12","100","365","52"],"BT = (…) × période / 12."],
+["q","TCV = doses administrées sur une période / … × 100",["Pop cible de cette période","doses sorties","population totale","doses reçues"],"On divise par la population cible de la même période."],
+["q","TP = (doses sorties − doses administrées) / … × 100",["doses sorties","doses administrées","population cible","stock restant"],"Les pertes se rapportent aux doses sorties."],
+["q","TU = doses effectivement administrées / … × 100",["doses sorties pendant la même période","population cible","doses reçues en stock","naissances vivantes"],"TU = 100 − TP."],
+["q","FR = SB − …",["recette des six mois couverts par le monitorage","les agios","les intérêts","la somme à budgétiser"],"FR = SB − recette des six mois couverts."],
+["q","TMPN = décès de … à 11 mois / naissances vivantes",["28 jours","8 jours","1 mois","6 mois"],"Post-néonatale : de 28 jours à 11 mois."],
+["q","TMM = décès maternels dans une année / …",["naissances vivantes de la même année","population totale","femmes enceintes","FAR"],"TMM se rapporte aux naissances vivantes."],
+["q","Pt = P0 + (Naissances − Décès) + (… )",["Immigrés − Émigrés","Immigrés + Émigrés","Décès − Naissances","TAA × P0"],"Solde migratoire = immigrés − émigrés."],
+["q","AD = AR + …",["TD","TAA","70","TP"],"Année de dédoublement = année de référence + temps de dédoublement."],
+["q","TAG = (Penta 1 − …) / Penta 1",["RR","Penta 3","VPO 3","BCG"],"Abandon global : Penta 1 − RR."],
+["q","TAS pour le Td = (Td1 − …) / Td1",["Td2","Td3","Penta 1","RR"],"TAS = (Td1 − Td2) / Td1."],
+["q","RP = recettes brutes − …",["TDC","SAB","FR","DFL"],"RP = RB − TDC."],
+["q","TDC = FAS + IP + …",["SPS","DFL","FR","SAB"],"TDC = FAS + IP + SPS."],
+["q","SAB = DO + …",["DFL","RVME","RCAS","FR"],"SAB = DO + DFL = RVME + RCAS."],
+["q","Autres dépenses = 85 % de …",["DFL","recettes brutes","TDC","SAB"],"AD = 85 % × DFL."],
+["q","Pop totale 5000 : combien d'enfants de 0 à 11 mois ?",["200","250","100","1000"],"PC = 4 % × 5000 = 200."],
+["q","TAA = 3,5 % : temps de dédoublement ?",["20 ans","14 ans","35 ans","10 ans"],"TD = 70 / 3,5 = 20 ans."],
+["q","Taux d'utilisation du vaccin = 80 % : facteur de perte ?",["1,25","1,20","0,80","1,80"],"FP = 100 / 80 = 1,25."],
+["q","BT = 800 doses : stock de sécurité en vaccin ?",["200","80","400","100"],"SS = 800 × 25 / 100 = 200."],
+["q","BT = 400, SS = 100, stock = 150 : quantité à commander ?",["350","550","250","500"],"BR = 500 ; QC = 500 − 150 = 350."],
+["q","Penta 1 = 100 et Penta 3 = 90 : taux d'abandon ?",["10 %","9 %","90 %","11 %"],"(100 − 90) / 100 = 10 %."],
+["q","Population de 1000 à 1050 : TAA sur la période ?",["5 %","50 %","0,5 %","10 %"],"(1050 − 1000) / 1000 = 5 %."],
+["q","Recettes brutes = 2 000 000 F : intéressement du personnel ?",["300 000 F","200 000 F","400 000 F","150 000 F"],"IP = 15 % × 2 000 000 = 300 000 F."],
+["q","Recettes brutes = 1 000 000 F (FAS 10 %, IP 15 %, SPS 20 %) : ressources propres ?",["550 000 F","450 000 F","850 000 F","650 000 F"],"TDC = 45 % ; RP = RB − TDC = 55 %."],
+["q","DFL = 400 000 F : montant des imprévus ?",["20 000 F","40 000 F","340 000 F","8 000 F"],"Imprévus = 5 % × DFL."],
+["q","Pop totale 8000 : nombre de femmes en âge de reproduction ?",["1600","800","400","2000"],"FAR = 20 % × 8000 = 1600."]
+];
+let a;
+let P,i,s,W,cur,lock;
+const sh=x=>{for(let j=x.length-1;j>0;j--){const r=Math.floor(Math.random()*(j+1));[x[j],x[r]]=[x[r],x[j]]}return x};
+function fmt(x){const names={TBN:"taux brut de natalité (TBN)",TBM:"taux brut de mortalité (TBM)",TAA:"taux d'accroissement annuel (TAA)",TGF:"taux général de fécondité (TGF)",TAN:"taux d'accroissement naturel (TAN)",TMNP:"taux de mortalité néonatale précoce (TMNP)",TMNT:"taux de mortalité néonatale tardive (TMNT)",TMPN:"taux de mortalité post-néonatale (TMPN)",TMI:"taux de mortalité infantile (TMI)",TMM:"taux de mortalité maternelle (TMM)",FP:"facteur de pertes (FP)",TAG:"taux d'abandon global (TAG)",TAS:"taux d'abandon spécifique (TAS)",TCV:"taux de couverture vaccinale (TCV)",TP:"taux de pertes (TP)",TU:"taux d'utilisation (TU)"};for(const [k,v] of Object.entries(names))x=x.replace(new RegExp('\\b'+k+'\\b','g'),v);return x.replace(/([^<>{}]+?)\s\/\s([^<>{}]+?)(?=(?:\s×|\s=|[.,;]|$))/g,(m,n,d)=>`<span class="frac"><span>${n.trim()}</span><span>${d.trim()}</span></span>`)}
+function home(){a.innerHTML=`<div class="hero"><div class="tag">🧮 Santé publique</div><h1>Quiz formules</h1><div>${Q.length} questions : Vrai/Faux, formules à compléter et petits calculs, tirées au hasard.</div></div><button class="o" onclick="window.__formula_go(10)">10 questions</button><button class="o" onclick="window.__formula_go(20)">20 questions</button><button class="o" onclick="window.__formula_go(${Q.length})">Toutes les questions (${Q.length})</button>`}
+function go(n){P=sh(Q.slice()).slice(0,n);i=0;s=0;W=[];show()}
+function show(){const q=P[i];lock=false;
+ cur=q[0]=="v"?{o:["Vrai","Faux"],ok:q[2]?0:1}:(()=>{const o=q[2].map((t,k)=>({t,k}));sh(o);return{o:o.map(x=>x.t),ok:o.findIndex(x=>x.k==0)}})();
+ a.innerHTML=`<div class="sub">Question ${i+1} / ${P.length}</div><div class="bar"><i style="width:${i/P.length*100}%"></i></div><div class="card"><b>${fmt(q[1])}</b>${cur.o.map((t,k)=>`<button class="o" onclick="window.__formula_pick(${k})">${t}</button>`).join("")}<div id="x"></div></div><button class="b g" onclick="window.__formula_home()">Quitter</button>`}
+function pick(k){if(lock)return;lock=true;const q=P[i],ok=k==cur.ok;if(ok)s++;else W.push([q,cur.o[k],cur.o[cur.ok]]);
+ a.querySelectorAll(".o").forEach((b,j)=>{if(j==cur.ok)b.classList.add("ok");else if(j==k)b.classList.add("ko")});
+ document.getElementById("x").innerHTML=`<div class="ex"><b>${ok?"✅ Juste":"❌ Faux"}</b><br><span class="f">Formule :</span> ${fmt(q[3])}</div><p><button class="b" onclick="window.__formula_nx()">${i==P.length-1?"Voir mon score":"Suivante"}</button></p>`}
+function nx(){i++;i<P.length?show():end()}
+function end(){a.innerHTML=`<div class="card" style="text-align:center"><div>Ton score</div><div class="big">${s} / ${P.length}</div><p>${Math.round(s/P.length*100)} %</p>${W.length?`<button class="b" onclick="window.__formula_rev()">Revoir mes erreurs (${W.length})</button>`:""}<button class="b" onclick="window.__formula_go(P.length)">Recommencer</button><button class="b g" onclick="window.__formula_home()">Menu</button></div>`}
+function rev(){a.innerHTML=`<div class="sub">Mes erreurs : ${W.length}</div>`+W.map(([q,u,c])=>`<div class="card"><b>${fmt(q[1])}</b><div class="o ko">❌ ${u}</div><div class="o ok">✅ ${c}</div><div class="ex"><span class="f">Formule :</span> ${fmt(q[3])}</div></div>`).join("")+`<button class="b" onclick="window.__formula_end()">← Retour au score</button>`}
+
+window.__formula_go=go;window.__formula_pick=pick;window.__formula_nx=nx;window.__formula_rev=rev;window.__formula_end=end;window.__formula_home=home;window.openFormulaQuiz=function(){a=document.getElementById("a");home()};
+
+})();
 </script></body></html>
