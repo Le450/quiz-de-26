@@ -3,7 +3,7 @@
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9KCJ8QPCET"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-9KCJ8QPCET");</script>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>MON D.E – Sujets D.E blanc</title><meta name="theme-color" content="#0b9a8f"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="MON D.E">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>MON D.E – Sujets D.E blanc</title><meta name="theme-color" content="#0b9a8f"><link rel="manifest" href="./manifest.webmanifest"><link rel="apple-touch-icon" href="./icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="MON D.E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f7f7f5;--fg:#1c1c1a;--card:#fff;--bd:#d8d8d2;--ac:#0b9a8f;--ok:#d6f0e3;--ko:#f9d9d6;--mut:#666;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -78,6 +78,8 @@ main#a.fade-in{animation:uxIn .22s ease}
 #toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 #confetti-canvas{position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:999}
 @media(prefers-reduced-motion:reduce){*,main#a,.fc,#toast,.o{animation:none!important;transition:none!important}}
+
+#install-offer{position:fixed;z-index:9999;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));max-width:620px;margin:auto;background:var(--card);color:var(--fg);border:1px solid var(--bd);border-radius:16px;box-shadow:0 8px 32px #0003;padding:16px;font:14px/1.45 system-ui,sans-serif}#install-offer[hidden]{display:none}#install-offer .io-top{display:flex;align-items:center;gap:12px}#install-offer img{width:44px;height:44px;border-radius:10px}#install-offer strong{font-size:16px}#install-offer p{margin:6px 0 12px;color:var(--mut)}#install-offer .io-actions{display:flex;gap:8px}#install-offer button{border:0;border-radius:10px;padding:10px 14px;font:600 14px system-ui;cursor:pointer}#install-now{background:var(--ac);color:white}#install-later{background:var(--bg);color:var(--fg)}
 </style></head><body><canvas id="confetti-canvas"></canvas><div id="hdr"></div><main id="a"></main><div id="toast"></div>
 <script>
 const D={am:(()=>{const C1="Élève G.G.D, 16 ans, a eu une aventure sexuelle pendant les vacances. Motif de consultation : brûlure mictionnelle avec dysurie et plaie au niveau du pénis.";
@@ -775,4 +777,6 @@ new MutationObserver(()=>{try{uxSvg()}catch(e){}a.classList.remove("fade-in");vo
 uxApplyTheme(uxTh);uxHeader();
 
 menu();
+</script><aside id="install-offer" role="dialog" aria-label="Installer MON D.E" hidden><div class="io-top"><img src="./icon-192.png" alt=""><div><strong>Installer MON D.E</strong><div>Ajoutez l’application à votre écran d’accueil.</div></div></div><p id="install-help">Accédez à vos sujets plus rapidement, même hors connexion.</p><div class="io-actions"><button id="install-now" type="button">Installer</button><button id="install-later" type="button">Plus tard</button></div></aside><script>
+(()=>{const box=document.getElementById("install-offer"),btn=document.getElementById("install-now"),help=document.getElementById("install-help");let installEvent=null;const ios=/iphone|ipad|ipod/i.test(navigator.userAgent),standalone=window.matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;if(standalone)return;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installEvent=e;btn.textContent="Installer";help.textContent="Accédez à vos sujets plus rapidement, même hors connexion.";box.hidden=false});window.addEventListener("appinstalled",()=>{box.hidden=true});document.getElementById("install-later").addEventListener("click",()=>box.hidden=true);btn.addEventListener("click",async()=>{if(installEvent){installEvent.prompt();await installEvent.userChoice;installEvent=null;box.hidden=true;return}if(ios){help.textContent="Dans Safari, touchez Partager puis « Sur l’écran d’accueil ».";return}help.textContent="Ouvrez le menu de votre navigateur, puis choisissez « Installer l’application » ou « Ajouter à l’écran d’accueil »."});box.hidden=false;if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))})();
 </script></body></html>
