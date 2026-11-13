@@ -86,6 +86,7 @@ main#a.fade-in{animation:uxIn .22s ease}
 #rn-pop .b{width:100%;margin-bottom:8px}
 .rn-new,.rn-badge{display:inline-block;background:var(--ac);color:#fff;font-size:11px;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:10px}
 .rn-badge{margin-left:6px;vertical-align:middle}
+.fx-dot{display:inline-block;background:#e74c3c;color:#fff;border-radius:10px;font-size:11px;font-weight:700;padding:1px 7px;margin-left:6px;vertical-align:middle}
 </style></head><body><canvas id="confetti-canvas"></canvas><div id="hdr"></div><main id="a"></main><div id="toast"></div>
 <script>
 const D={am:(()=>{const C1="Élève G.G.D, 16 ans, a eu une aventure sexuelle pendant les vacances. Motif de consultation : brûlure mictionnelle avec dysurie et plaie au niveau du pénis.";
@@ -829,14 +830,95 @@ function rnj(j){
  a.innerHTML=`<div class="hero"><div class="tag">📅 Révision nationale 2025 · ${j}</div><h1>Choisis la matière</h1></div><div class="list">`+RN_DATA[j].map(x=>`<a class="tile row" style="text-decoration:none;color:inherit" href="${x[1]}" target="_blank" rel="noopener noreferrer" onclick="rnOpen('${j}','${x[0]}')"><span class="e">${em(x[0])}</span><span><b>${x[0]}</b><small>Ouvre le formulaire en ligne</small></span></a>`).join("")+`</div><p><button class="b g" onclick="rn()">← Retour</button></p>`}
 function rnOpen(j,m){gaTrack("revision_nationale_ouverte",{journee:j,matiere:m})}
 function rnClose(){const e=document.getElementById("rn-pop");if(e)e.remove()}
-function rnGo(){rnClose();rn()}
-function rnLater(){rnMarkNews();rnClose()}
-function rnPopup(){if(rnSeenNews().includes(RN_NEWS)||document.getElementById("rn-pop"))return;
- document.body.insertAdjacentHTML("beforeend",`<div id="rn-pop" role="dialog" aria-modal="true" aria-label="Nouveauté"><div class="rn-box"><div class="rn-new">NOUVEAU</div><h2>Révision nationale 2025</h2><p>Les 10 journées de révision en ligne sont maintenant dans l'appli : une page par journée, puis la matière.</p><button class="b" onclick="rnGo()">Voir les journées</button><button class="b g" onclick="rnLater()">Plus tard</button></div></div>`)}
 const _menuRN=menu;menu=function(){_menuRN();rnClose();
  const y=a.querySelector('button[onclick="oy()"]');
  if(y)y.insertAdjacentHTML("afterend",`<button class="tile row" style="width:100%;margin-top:10px" onclick="rn()"><span class="e">📝</span><span><b>Révision nationale 2025${rnVisited()?"":' <span class="rn-badge">NOUVEAU</span>'}</b><small>Journées J1 à J10, par matière</small></span></button>`);
  rnPopup()};
+
+SVG_ICONS.note='<svg class="icon" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>';UXEM["📝"]="note";
+/* ===== Plan de révision, révision éclair, sauvegarde, taille du texte, quoi de neuf ===== */
+const fxId=q=>{const t=q[0]+"|"+q[1].join("|");let h=5381;for(let k=0;k<t.length;k++)h=((h<<5)+h+t.charCodeAt(k))|0;return(h>>>0).toString(36)};
+let fxErr=uxLS.get("quiz_errors_v1",{}),fxSeenS=new Set(uxLS.get("quiz_seen_v1",[])),fxDaily=uxLS.get("quiz_daily_v1",{}),fxSt=uxLS.get("quiz_stats_v1",{}),fxFsI=uxLS.get("quiz_fs_v1",0);
+let fxIX=null;
+function fxIdx(){if(fxIX)return fxIX;const km={};Object.keys(MAT).filter(m=>!/Toutes/.test(m)).forEach(m=>MAT[m].forEach(k=>km[k]=m));const all=[],seen=new Set();
+ Object.keys(D).forEach(k=>{const d=D[k];if(!d||!d.Q)return;d.Q.forEach((q,j)=>{const u=fxId(q);if(seen.has(u))return;seen.add(u);const t=d.tf,f=q[5]!==undefined?q[5]:typeof t=="function"?t(j):j<t;all.push({u,k,j,mat:km[k]||"",q:[q[0],q[1],q[2],q[3],q[4]===undefined?null:q[4],!!f]})})});
+ fxIX={all,by:Object.fromEntries(all.map(x=>[x.u,x]))};return fxIX}
+const fxShuf=r=>{for(let j=r.length-1;j>0;j--){const k=Math.floor(Math.random()*(j+1));[r[j],r[k]]=[r[k],r[j]]}return r};
+const fxToday=()=>uxYmd(new Date());
+const fxDays=()=>Math.round((new Date(DATE_DE+"T00:00:00")-new Date(fxToday()+"T00:00:00"))/864e5);
+/* suivi des réponses */
+function fxRec(q,ok){const u=fxId(q),x=fxIdx().by[u];fxSeenS.add(u);uxLS.set("quiz_seen_v1",[...fxSeenS]);
+ const t=fxToday();fxDaily[t]=(fxDaily[t]||0)+1;uxLS.set("quiz_daily_v1",fxDaily);
+ if(x&&x.mat){const e=fxSt[x.mat]||[0,0];e[0]++;if(ok)e[1]++;fxSt[x.mat]=e;uxLS.set("quiz_stats_v1",fxSt)}
+ if(ok){if(fxErr[u]){delete fxErr[u];uxLS.set("quiz_errors_v1",fxErr)}}else{fxErr[u]=(fxErr[u]||0)+1;uxLS.set("quiz_errors_v1",fxErr)}}
+const _checkFX=check;check=function(skip){const q=Qs&&Qs[i],ok=!skip&&q&&[...sel].sort().join("")===q[2],ex=examActive;_checkFX(skip);if(!ex&&!skip&&q)try{fxRec(q,ok)}catch(e){}};
+function fxPlay(list,title,again2){if(!list.length)return;Qs=list;TF=0;ttl=title;i=0;s=0;W=[];again=again2;pgK=null;pgRec=false;show()}
+/* plan de révision */
+function fxPick(n,weak){const ix=fxIdx(),units=[];let cur=null;
+ ix.all.forEach(x=>{const c=x.q[4];if(c&&cur&&cur.k===x.k&&cur.c===c)cur.m.push(x);else{cur={k:x.k,c:c,m:[x]};units.push(cur)}});
+ const un=fxShuf(units.filter(u=>u.m.some(x=>!fxSeenS.has(x.u)))),w=weak?un.filter(u=>u.m[0].mat===weak):[],o=un.filter(u=>!w.includes(u)),out=[];let cnt=0;
+ const take=(l,lim)=>{for(const u of l){if(cnt>=lim)break;out.push(u);cnt+=u.m.length}};
+ take(w,Math.ceil(n/2));take(o,n);take(w,n);if(!out.length)take(fxShuf(units.slice()),n);
+ return out.flatMap(u=>u.m.map(x=>x.q))}
+function fxStats(){const ix=fxIdx(),r={};Object.keys(MAT).filter(m=>!/Toutes/.test(m)).forEach(m=>r[m]={tot:0,seen:0,ans:(fxSt[m]||[0,0])[0],good:(fxSt[m]||[0,0])[1]});
+ ix.all.forEach(x=>{if(r[x.mat]){r[x.mat].tot++;if(fxSeenS.has(x.u))r[x.mat].seen++}});
+ let weak=null,wv=2;Object.keys(r).forEach(m=>{const e=r[m];if(e.ans>=10){const p=e.good/e.ans;if(p<wv){wv=p;weak=m}}});
+ const q=Object.keys(r).filter(m=>r[m].ans>=10);if(q.length<2)weak=null;return{r,weak}}
+function fxQuota(){const ix=fxIdx(),tot=ix.all.length,seen=ix.all.filter(x=>fxSeenS.has(x.u)).length,left=tot-seen,d=Math.max(1,fxDays());
+ return{tot,seen,left,d,q:left>0?Math.min(100,Math.max(10,Math.ceil(left/d))):10}}
+function fxSession(){const{weak}=fxStats(),{q}=fxQuota();gaTrack("seance_du_jour",{questions:q});fxPlay(fxPick(q,weak),"Séance du jour",fxSession)}
+function fxPlan(){const P=fxQuota(),S=fxStats(),done=fxDaily[fxToday()]||0,dd=fxDays(),pct=Math.min(100,done/P.q*100);gaTrack("plan_revision_ouvert");
+ a.innerHTML=`<div class="hero"><div class="tag">Plan de révision</div><h1>${dd>0?"J-"+dd+" avant le D.E":dd===0?"C'est aujourd'hui !":"Le D.E est passé"}</h1><div>${P.left>0?"Pour tout voir avant le D.E : "+Math.ceil(P.left/Math.max(1,dd))+" questions par jour.":"Tu as vu toutes les questions. Continue avec la révision éclair."}</div></div>`+
+ `<div class="card"><b>Aujourd'hui</b><div class="sub" style="margin:4px 0">${done} / ${P.q} questions</div><div class="bar"><i style="width:${pct}%"></i></div><button class="b" onclick="fxSession()">Commencer la séance (${P.q} questions)</button></div>`+
+ `<div class="card"><b>Ce qu'il te reste</b><div class="sub" style="margin:4px 0">${P.left} question${P.left>1?"s":""} pas encore vue${P.left>1?"s":""} sur ${P.tot}</div><div class="bar"><i style="width:${P.seen/P.tot*100}%"></i></div></div>`+
+ `<div class="sec">Par matière</div>`+Object.keys(S.r).map(m=>{const e=S.r[m],p=e.ans?Math.round(e.good/e.ans*100):null;return `<div class="card"><b>${m}</b>${S.weak===m?' <span class="rn-badge">À RENFORCER</span>':""}<div class="sub" style="margin:4px 0">${e.seen} / ${e.tot} vues${p===null?"":" · réussite "+p+" %"}</div><div class="bar" style="margin-bottom:0"><i style="width:${e.tot?e.seen/e.tot*100:0}%"></i></div></div>`}).join("")+
+ `<p class="sub">La séance du jour propose surtout des questions jamais vues, avec un accent sur ta matière la plus faible. Les études de cas restent complètes.</p><p><button class="b g" onclick="menu()">← Retour</button></p>`}
+/* révision éclair */
+function fxFlash(){const ix=fxIdx(),ids=Object.keys(fxErr).filter(u=>ix.by[u]);if(!ids.length){uxToast("Aucune erreur à réviser pour le moment");return}
+ gaTrack("revision_eclair",{erreurs:ids.length});fxPlay(fxShuf(ids).slice(0,5).map(u=>ix.by[u].q),"Révision éclair",fxFlash)}
+/* sauvegarde */
+const FX_KEYS=["monde_progress_v1","quiz_streak_v1","quiz_badges_v1","quiz_marks_v1","quiz_theme_v1","quiz_errors_v1","quiz_seen_v1","quiz_daily_v1","quiz_stats_v1","quiz_news_v1","quiz_rn_visited_v1","quiz_fs_v1"];
+function fxCode(){const o={};FX_KEYS.forEach(k=>{try{const v=localStorage.getItem(k);if(v!==null)o[k]=v}catch(e){}});return"MONDE1:"+btoa(unescape(encodeURIComponent(JSON.stringify(o))))}
+function fxMsg(t,ok){const e=document.getElementById("fx-msg");if(e){e.textContent=t;e.style.color=ok?"var(--ac)":"#c0392b"}}
+function fxCopy(){const c=fxCode();gaTrack("sauvegarde_export",{mode:"copie"});(navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(c):Promise.reject()).then(()=>fxMsg("Code copié. Colle-le dans un message WhatsApp à toi-même.",true)).catch(()=>{const t=document.getElementById("fx-out");t.style.display="block";t.value=c;t.select();fxMsg("Copie le code ci-dessous.",true)})}
+function fxFile(){const b=new Blob([fxCode()],{type:"text/plain"}),u=URL.createObjectURL(b),l=document.createElement("a");l.href=u;l.download="mon-de-sauvegarde.txt";document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);gaTrack("sauvegarde_export",{mode:"fichier"});fxMsg("Fichier téléchargé.",true)}
+let fxArm=false;
+function fxRestore(txt){const el=document.getElementById("fx-in");txt=(txt||el.value||"").trim();if(!txt.startsWith("MONDE1:")){fxMsg("Ce code n'est pas valide.",false);return}
+ let o;try{o=JSON.parse(decodeURIComponent(escape(atob(txt.slice(7)))))}catch(e){fxMsg("Ce code est abîmé ou incomplet.",false);return}
+ if(!fxArm){fxArm=true;document.getElementById("fx-go").textContent="Confirmer : remplacer ma progression";fxMsg("Cela remplace la progression de cet appareil.",false);return}
+ try{Object.keys(o).forEach(k=>{if(FX_KEYS.includes(k)&&typeof o[k]==="string")localStorage.setItem(k,o[k])})}catch(e){fxMsg("Impossible d'écrire sur cet appareil.",false);return}
+ gaTrack("sauvegarde_import");fxMsg("Progression restaurée. Redémarrage…",true);setTimeout(()=>location.reload(),700)}
+function fxFileIn(inp){const f=inp.files&&inp.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{document.getElementById("fx-in").value=String(r.result||"").trim();fxArm=false;document.getElementById("fx-go").textContent="Restaurer";fxMsg("Fichier chargé. Appuie sur Restaurer.",true)};r.readAsText(f)}
+function fxBackup(){fxArm=false;a.innerHTML=`<div class="hero"><div class="tag">Sauvegarde</div><h1>Ta progression</h1><div>Change de téléphone sans rien perdre : exporte ton code, puis colle-le sur le nouvel appareil.</div></div>`+
+ `<div class="card"><b>1. Exporter</b><div class="sub" style="margin:4px 0 10px">Ton code contient ta progression, tes badges, tes erreurs, tes statistiques et tes questions marquées.</div><button class="b" onclick="fxCopy()">Copier mon code</button><button class="b g" onclick="fxFile()">Télécharger un fichier</button><textarea id="fx-out" readonly style="display:none;width:100%;height:90px;margin-top:8px"></textarea></div>`+
+ `<div class="card"><b>2. Restaurer</b><div class="sub" style="margin:4px 0 10px">Colle ton code ici, ou choisis ton fichier.</div><textarea id="fx-in" placeholder="MONDE1:..." oninput="fxArm=false;document.getElementById('fx-go').textContent='Restaurer'" style="width:100%;height:90px;background:var(--card);color:var(--fg);border:1px solid var(--bd);border-radius:10px;padding:8px;font:inherit"></textarea><input type="file" accept=".txt,text/plain" onchange="fxFileIn(this)" style="margin:8px 0;max-width:100%"><button class="b" id="fx-go" onclick="fxRestore()">Restaurer</button></div>`+
+ `<div id="fx-msg" class="sub" role="status"></div><p><button class="b g" onclick="menu()">← Retour</button></p>`}
+/* taille du texte */
+const FX_FS=[[1,"normale"],[1.12,"grande"],[1.25,"très grande"]];
+function fxApplyFs(){let s=document.getElementById("fx-zoom");if(!s){s=document.createElement("style");s.id="fx-zoom";document.head.appendChild(s)}s.textContent="main#a{zoom:"+FX_FS[fxFsI][0]+"}"}
+function fxFsNext(){fxFsI=(fxFsI+1)%FX_FS.length;uxLS.set("quiz_fs_v1",fxFsI);fxApplyFs();uxToast("Taille du texte : "+FX_FS[fxFsI][1])}
+if(!(fxFsI>=0&&fxFsI<FX_FS.length))fxFsI=0;fxApplyFs();
+const _hdrFX=uxHeader;uxHeader=function(){_hdrFX();const r=document.querySelector("#hdr .hr");if(r)r.insertAdjacentHTML("afterbegin",`<button class="theme-toggle" onclick="fxFsNext()" aria-label="Taille du texte" style="font-weight:700;font-size:15px">Aa</button>`)};
+uxHeader();
+/* quoi de neuf */
+const NEWS=[
+{id:"n20261113",d:"13 novembre 2026",t:"Nouveaux outils de révision",l:["Plan de révision : combien de questions par jour jusqu'au D.E","Révision éclair : 5 questions tirées de tes erreurs","Sauvegarde : retrouve ta progression sur un autre téléphone","Taille du texte réglable avec le bouton Aa"],go:"fxPlan()",b:"Voir mon plan"},
+{id:"rn2025",d:"12 novembre 2026",t:"Révision nationale 2025",l:["10 journées de révision en ligne, de J1 à J10","Médecine, Pédiatrie, Santé publique et Chirurgie dans chaque journée"],go:"rn()",b:"Ouvrir"}];
+const fxUnread=()=>{const s=uxLS.get("quiz_news_v1",[]);return NEWS.filter(n=>!s.includes(n.id))};
+function fxMarkAll(){uxLS.set("quiz_news_v1",NEWS.map(n=>n.id))}
+function fxNews(){fxMarkAll();rnClose();
+ a.innerHTML=`<div class="hero"><div class="tag">Quoi de neuf</div><h1>Les nouveautés</h1></div>`+NEWS.map(n=>`<div class="card"><div class="sub" style="margin:0">${n.d}</div><b>${n.t}</b><ul style="margin:6px 0 10px;padding-left:20px">${n.l.map(x=>`<li>${x}</li>`).join("")}</ul><button class="b g" onclick="${n.go}" style="margin:0">${n.b}</button></div>`).join("")+`<p><button class="b g" onclick="menu()">← Retour</button></p>`}
+function rnGo(){rnClose();fxNews()}
+function rnLater(){fxMarkAll();rnClose()}
+function rnPopup(){const u=fxUnread();if(!u.length||document.getElementById("rn-pop"))return;
+ document.body.insertAdjacentHTML("beforeend",`<div id="rn-pop" role="dialog" aria-modal="true" aria-label="Nouveautés"><div class="rn-box"><div class="rn-new">NOUVEAU</div><h2>${u.length>1?"Du nouveau dans l'appli":u[0].t}</h2><p>${u.map(n=>n.t).join(" · ")}</p><button class="b" onclick="rnGo()">Voir les nouveautés</button><button class="b g" onclick="rnLater()">Plus tard</button></div></div>`)}
+const _menuFX=menu;menu=function(){_menuFX();const r=a.querySelector('button[onclick="rn()"]');if(!r)return;
+ const ic=p=>`<svg class="icon icon-lg" viewBox="0 0 24 24">${p}</svg>`,n=Object.keys(fxErr).length,P=fxQuota(),un=fxUnread().length;
+ const row=(f,i,b,sm)=>`<button class="tile row" style="width:100%;margin-top:10px" onclick="${f}"><span class="e">${i}</span><span><b>${b}</b><small>${sm}</small></span></button>`;
+ const tl=(f,i,b,sm)=>`<button class="tile" onclick="${f}"><span class="e">${i}</span><b>${b}</b><small>${sm}</small></button>`;
+ r.insertAdjacentHTML("afterend",row("fxPlan()",SVG_ICONS.cal.replace('class="icon"','class="icon icon-lg"'),"Plan de révision",fxDays()>0?"Aujourd'hui : "+P.q+" questions":"Ta séance du jour")+
+  row("fxFlash()",ic('<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'),"Révision éclair",n?"5 questions tirées de tes "+n+" erreurs":"Aucune erreur à revoir")+
+  `<div class="grid" style="margin-top:10px">`+tl("fxNews()",ic('<path d="M4 4h16v16H4z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/>'),"Quoi de neuf"+(un?` <span class="fx-dot">${un}</span>`:""),"Les nouveautés")+tl("fxBackup()",ic('<path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/>'),"Sauvegarde","Changer de téléphone")+`</div>`)};
 
 menu();
 </script><aside id="install-offer" role="dialog" aria-label="Installer MON D.E" hidden><div class="io-top"><img src="./icon-192.png" alt=""><div><strong>Installer MON D.E</strong><div>Ajoutez l’application à votre écran d’accueil.</div></div></div><p id="install-help">Accédez à vos sujets plus rapidement, même hors connexion.</p><div class="io-actions"><button id="install-now" type="button">Installer</button><button id="install-later" type="button">Plus tard</button></div></aside><script>
