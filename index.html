@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr"><head>
+<html lang="fr"><head><script>window.__fxPrior=(function(){try{return["monde_progress_v1","quiz_streak_v1","quiz_badges_v1","quiz_marks_v1","quiz_theme_v1","quiz_news_v1","quiz_stats_v1","quiz_seen_v1","monde_composition_draft_v1"].some(function(k){return localStorage.getItem(k)!==null})}catch(e){return false}})()</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9KCJ8QPCET"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date());gtag("config","G-9KCJ8QPCET");</script>
@@ -88,6 +88,49 @@ main#a.fade-in{animation:uxIn .22s ease}
 .rn-badge{margin-left:6px;vertical-align:middle}
 .fx-dot{display:inline-block;background:#e74c3c;color:#fff;border-radius:10px;font-size:11px;font-weight:700;padding:1px 7px;margin-left:6px;vertical-align:middle}
 .days{display:flex;align-items:flex-end;gap:8px;min-height:100px}.days div{flex:1;text-align:center;font-size:11px;color:var(--mut)}.days i{display:block;background:var(--ac);border-radius:4px 4px 0 0;margin:2px 0}.sbar{height:10px;background:var(--bd);border-radius:5px;overflow:hidden}.sbar i{display:block;height:100%;background:var(--ac);border-radius:5px}.sbar.low i{background:#e67e22}
+.streak-banner{display:none!important}
+#hdr .hl{display:flex;align-items:center;gap:4px}
+.fx-hb{position:relative;background:none;border:0;color:var(--fg);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;margin-left:-8px}
+.fx-hb .icon{width:26px;height:26px}.fx-pt{position:absolute;top:9px;right:9px;width:9px;height:9px;border-radius:50%;background:#e74c3c;border:2px solid var(--bg)}
+#hdr .flame{background:none;border:0;font:inherit;cursor:pointer;min-height:44px;padding:0 4px}
+.fx-me{background:none;border:0;padding:0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;border-radius:50%}
+.fx-me .av{box-shadow:0 0 0 2px var(--ac)}
+.av{display:inline-block;border-radius:50%;overflow:hidden;flex-shrink:0;line-height:0;vertical-align:middle}
+.av svg{display:block}
+.av-eyes{transform-box:fill-box;transform-origin:center;animation:avBlink 5.2s infinite}
+.av-head{transform-origin:60px 90px;animation:avBob 4.6s ease-in-out infinite}
+.av-body{transform-origin:60px 120px;animation:avBreath 4.6s ease-in-out infinite}
+@keyframes avBlink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}
+@keyframes avBob{0%,100%{transform:translateY(0) rotate(0)}25%{transform:translateY(-1.4px) rotate(1deg)}50%{transform:translateY(0) rotate(0)}75%{transform:translateY(-1.4px) rotate(-1deg)}}
+@keyframes avBreath{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.012)}}
+.fx-modal{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;padding:16px}
+.fx-modal .rn-box{background:var(--card);color:var(--fg);border:1px solid var(--bd);border-radius:16px;padding:20px;max-width:420px;width:100%;box-shadow:0 8px 32px rgba(0,0,0,.3);text-align:center;max-height:88vh;overflow:auto}
+.fx-modal h2{margin:6px 0 8px;font-size:20px}.fx-modal p{margin:0 0 14px;color:var(--mut)}.fx-modal .b{width:100%;margin-bottom:8px}
+.fx-ul{text-align:left;margin:8px 0 14px;padding-left:20px;color:var(--fg)}.fx-ul li{margin-bottom:6px}
+#fx-dr{position:fixed;inset:0;z-index:10020;pointer-events:none}#fx-dr.open{pointer-events:auto}
+.fx-scrim{position:absolute;inset:0;background:rgba(0,0,0,.45);opacity:0;transition:opacity .2s}#fx-dr.open .fx-scrim{opacity:1}
+.fx-panel{position:absolute;top:0;bottom:0;left:0;width:min(86vw,320px);background:var(--card);color:var(--fg);border-right:1px solid var(--bd);box-shadow:4px 0 24px rgba(0,0,0,.25);transform:translateX(-100%);transition:transform .22s ease;overflow-y:auto;padding:12px 10px calc(16px + env(safe-area-inset-bottom,0px))}
+#fx-dr.open .fx-panel{transform:none}
+.fx-ph{display:flex;align-items:center;gap:12px;padding:6px 6px 12px;border-bottom:1px solid var(--bd);margin-bottom:6px}.fx-ph b{display:block;font-size:16px}.fx-ph small{color:var(--mut)}.fx-ph>div{flex:1;min-width:0}
+.fx-x{background:none;border:0;color:var(--mut);width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.fx-sec{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--mut);padding:14px 10px 4px}
+.fx-it{display:flex;align-items:center;gap:14px;width:100%;min-height:46px;background:none;border:0;border-radius:10px;color:var(--fg);font:inherit;font-weight:500;text-align:left;padding:8px 10px;cursor:pointer}
+.fx-it:active,.fx-it:hover{background:var(--badge-bg)}.fx-it .icon{color:var(--ac)}
+.fx-seg{display:flex;gap:6px;margin-top:8px}.fx-seg button{flex:1;min-height:44px;border:1px solid var(--bd);background:var(--card);color:var(--fg);border-radius:10px;font:inherit;font-weight:600;cursor:pointer}
+.fx-seg button.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.fx-prev{display:flex;justify-content:center;margin:10px 0 4px}.fx-prev .av{box-shadow:0 0 0 3px var(--ac)}
+.fx-models{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.fx-models button{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 4px;border:2px solid var(--bd);border-radius:12px;background:var(--card);color:var(--fg);font:inherit;cursor:pointer}
+.fx-models button.on{border-color:var(--ac);background:var(--badge-bg)}.fx-models small{font-size:11px;line-height:1.2;text-align:center}
+.fx-skins{display:flex;gap:10px;flex-wrap:wrap}.fx-skins button{width:44px;height:44px;border-radius:50%;border:3px solid var(--bd);cursor:pointer}.fx-skins button.on{border-color:var(--ac);box-shadow:0 0 0 2px var(--card) inset}
+.fx-lab{display:block;font-weight:600;margin:12px 0 6px}.fx-err{color:#c0392b;font-size:13px;min-height:18px;margin:4px 0}
+#fx-wiz{position:fixed;inset:0;z-index:10050;background:var(--bg);color:var(--fg);overflow-y:auto}.fx-wiz-in{max-width:520px;margin:0 auto;padding:24px 16px calc(24px + env(safe-area-inset-bottom,0px))}
+.fx-logo{font-weight:800;font-size:18px;color:var(--ac)}#fx-wiz h1{margin:8px 0 4px}
+.fx-prof{display:flex;align-items:center;gap:14px;margin:6px 0 4px}.fx-prof b{font-size:20px;display:block}
+.fx-hello h2{margin:6px 0 10px;font-size:22px}
+.fx-today .tile{width:100%;margin-top:10px}
+.fx-subrow{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.fx-qflame{display:inline-flex;align-items:center;gap:4px;flex-shrink:0;background:rgba(230,126,34,.15);color:var(--warm);padding:2px 9px;border-radius:20px;font-weight:700;font-size:13px}.fx-qflame .icon{width:16px;height:16px}
+.lnk{background:none;border:0;color:var(--ac);font:inherit;font-size:14px;text-decoration:underline;cursor:pointer;min-height:36px;padding:0}
 </style></head><body><canvas id="confetti-canvas"></canvas><div id="hdr"></div><main id="a"></main><div id="toast"></div>
 <script>
 const D={am:(()=>{const C1="Élève G.G.D, 16 ans, a eu une aventure sexuelle pendant les vacances. Motif de consultation : brûlure mictionnelle avec dysurie et plaie au niveau du pénis.";
@@ -770,11 +813,11 @@ const UXEM={"🏥":"hospital","🎲":"dice","📚":"book","🩺":"med","👶":"b
 function uxSvg(){a.querySelectorAll(".tile .e").forEach(e=>{const k=UXEM[e.textContent.trim()];if(k)e.innerHTML=SVG_ICONS[k].replace('class="icon"','class="icon icon-lg"')});
  a.querySelectorAll(".hero .tag,.sec").forEach(e=>{const t=e.firstChild;if(t&&t.nodeType===3){const m=t.nodeValue.match(/^\s*(\p{Extended_Pictographic})️?\s*/u);if(m){const k=UXEM[m[1]];t.nodeValue=t.nodeValue.slice(m[0].length);if(k)e.insertAdjacentHTML("afterbegin",SVG_ICONS[k].replace('class="icon"','class="icon icon-sm"'))}}})}
 /* accroches sur le moteur (sans le modifier) */
-const _show=show;show=function(){_show();if(i===0){uxQs=0;uxCf=false}uxStar();if(uxQs>=3){const b=a.querySelector(".bar");if(b)b.insertAdjacentHTML("afterend",`<div class="streak-banner">${SVG_ICONS.flame} ${uxQs} bonnes réponses d'affilée</div>`)}};
+const _show=show;show=function(){_show();if(i===0){uxQs=0;uxCf=false}uxStar()};
 const _check=check;check=function(skip){const q=Qs[i],ok=!skip&&[...sel].sort().join("")===q[2];_check(skip);uxTrack();
  if(ok){uxQs++;if(uxQs>=10)uxUnlock("streak_10")}else uxQs=0;
  a.querySelectorAll(".o").forEach(b=>{if(ok&&b.classList.contains("ok"))b.classList.add("pulse-green");else if(b.classList.contains("ko"))b.classList.add("shake-red")});
- const x=a.querySelector("#f .ex");if(x&&ok&&uxQs>=3)x.insertAdjacentHTML("beforeend",`<div class="streak-banner">${SVG_ICONS.flame} ${uxQs} bonnes réponses d'affilée</div>`)};
+};
 const _end2=end;end=function(){_end2();if(!Qs||!Qs.length)return;uxTrack();uxUnlock("first_step");
  if(pgAll().filter(k=>PG[k]).length>=10)uxUnlock("ten_tests");
  const pk=(MAT["Pédiatrie"]||[]).filter(k=>D[k]);if(pk.length&&pk.every(k=>PG[k]))uxUnlock("pediatrie_master");
@@ -878,7 +921,7 @@ function fxPlan(){const P=fxQuota(),S=fxStats(),done=fxDaily[fxToday()]||0,dd=fx
 function fxFlash(){const ix=fxIdx(),ids=Object.keys(fxErr).filter(u=>ix.by[u]);if(!ids.length){uxToast("Aucune erreur à réviser pour le moment");return}
  gaTrack("revision_eclair",{erreurs:ids.length});fxPlay(fxShuf(ids).slice(0,5).map(u=>ix.by[u].q),"Révision éclair",fxFlash)}
 /* sauvegarde */
-const FX_KEYS=["monde_progress_v1","quiz_streak_v1","quiz_badges_v1","quiz_marks_v1","quiz_theme_v1","quiz_errors_v1","quiz_seen_v1","quiz_daily_v1","quiz_stats_v1","quiz_news_v1","quiz_rn_visited_v1","quiz_fs_v1","quiz_shuffle_v1","quiz_defi_v1"];
+const FX_KEYS=["monde_progress_v1","quiz_streak_v1","quiz_badges_v1","quiz_marks_v1","quiz_theme_v1","quiz_errors_v1","quiz_seen_v1","quiz_daily_v1","quiz_stats_v1","quiz_news_v1","quiz_rn_visited_v1","quiz_fs_v1","quiz_shuffle_v1","quiz_defi_v1","quiz_profile_v1"];
 function fxCode(){const o={};FX_KEYS.forEach(k=>{try{const v=localStorage.getItem(k);if(v!==null)o[k]=v}catch(e){}});return"MONDE1:"+btoa(unescape(encodeURIComponent(JSON.stringify(o))))}
 function fxMsg(t,ok){const e=document.getElementById("fx-msg");if(e){e.textContent=t;e.style.color=ok?"var(--ac)":"#c0392b"}}
 function fxCopy(){const c=fxCode();gaTrack("sauvegarde_export",{mode:"copie"});(navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(c):Promise.reject()).then(()=>fxMsg("Code copié. Colle-le dans un message WhatsApp à toi-même.",true)).catch(()=>{const t=document.getElementById("fx-out");t.style.display="block";t.value=c;t.select();fxMsg("Copie le code ci-dessous.",true)})}
@@ -903,6 +946,7 @@ const _hdrFX=uxHeader;uxHeader=function(){_hdrFX();const r=document.querySelecto
 uxHeader();
 /* quoi de neuf */
 const NEWS=[
+{id:"n20261113c",d:"13 novembre 2026",t:"Nouvelle interface, profil et avatars",l:["Menu ☰ en haut à gauche avec toutes les rubriques","Ton profil : nom et avatar animé, un clic ouvre les paramètres","Le bouton retour du téléphone revient à la page précédente","Accueil plus court avec ta séance et le défi du jour"],go:"fxSettings()",b:"Ouvrir mes paramètres"},
 {id:"n20261113b",d:"13 novembre 2026",t:"Défi du jour, cas cliniques, statistiques",l:["Défi du jour : 10 questions identiques pour tout le monde, avec partage du score","Cas cliniques : un quiz uniquement sur les études de cas","Chercher une question par mot, avec la réponse et l'explication","Mes statistiques : réussite par matière et activité de la semaine","Mélange des questions et des options, que tu peux désactiver"],go:"fxDefi()",b:"Faire le défi du jour"},
 {id:"n20261113",d:"13 novembre 2026",t:"Nouveaux outils de révision",l:["Plan de révision : combien de questions par jour jusqu'au D.E","Révision éclair : 5 questions tirées de tes erreurs","Sauvegarde : retrouve ta progression sur un autre téléphone","Taille du texte réglable avec le bouton Aa"],go:"fxPlan()",b:"Voir mon plan"},
 {id:"rn2025",d:"12 novembre 2026",t:"Révision nationale 2025",l:["10 journées de révision en ligne, de J1 à J10","Médecine, Pédiatrie, Santé publique et Chirurgie dans chaque journée"],go:"rn()",b:"Ouvrir"}];
@@ -972,7 +1016,187 @@ const _menuFX=menu;menu=function(){_menuFX();const r=a.querySelector('button[onc
   `<div class="grid" style="margin-top:10px">`+tl("fxStatsPage()",SVG_ICONS.chart.replace('class="icon"','class="icon icon-lg"'),"Mes statistiques","Par matière")+tl("fxShufTog()",SVG_ICONS.dice.replace('class="icon"','class="icon icon-lg"'),"Mélange","Questions et options : "+(fxShufOn()?"oui":"non"))+
   tl("fxNews()",ic('<path d="M4 4h16v16H4z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/>'),"Quoi de neuf"+(un?` <span class="fx-dot">${un}</span>`:""),"Les nouveautés")+tl("fxBackup()",ic('<path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/>'),"Sauvegarde","Changer de téléphone")+`</div>`)};
 
+/* ===== v4 : navigation, tiroir, profil, avatars, paramètres, pop-ups ===== */
+const fxEsc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fxIc=p=>`<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">${p}</svg>`;
+let fxProf=uxLS.get("quiz_profile_v1",null);
+const fxType=()=>{let t=uxLS.get("quiz_utype_v1",null);if(!t){t=window.__fxPrior===true?"o":"n";uxLS.set("quiz_utype_v1",t)}return t};
+const fxName=()=>fxProf&&fxProf.name?fxProf.name:"";
+
+/* ---------- avatars (SVG, tête et épaules, animés) ---------- */
+const FX_SKIN=[["Très foncée","#4a2a18"],["Foncée","#6b3f25"],["Brune","#8f5a37"],["Métisse","#c28a5f"],["Claire","#e6b896"],["Très claire","#f6d9c4"]];
+const FX_MODELS=[["Blouse d'infirmier(ère)"],["Tenue de bloc"],["Tenue de maison"]];
+const fxMix=(h,to,p)=>{const n=parseInt(h.slice(1),16),f=to==="d"?0:255,m=c=>Math.round(c+(f-c)*p);return"#"+((1<<24)+(m(n>>16)<<16)+(m(n>>8&255)<<8)+m(n&255)).toString(16).slice(1)};
+function fxAvatar(av,size){
+ av=av||{g:"m",m:0,s:3};const sk=FX_SKIN[av.s]||FX_SKIN[3],c=sk[1],d=fxMix(c,"d",.2),f=av.g==="f",m=av.m|0,hair=av.s<=1?"#0d0806":"#1e130d";
+ const bg=["#d9f0ec","#dbe8fb","#fbe9d6"][m]||"#d9f0ec";
+ const sh="M8 120C8 100 26 92 46 90L74 90C94 92 112 100 112 120Z";
+ let body="",hairBack="",hairFront="",extra="";
+ if(m===0){body=`<path d="${sh}" fill="#fff"/><path d="${sh}" fill="none" stroke="#cfd8dc" stroke-width="1.2"/><path d="M50 90L60 106L70 90" fill="none" stroke="#0b9a8f" stroke-width="3" stroke-linejoin="round"/><path d="M50 91L60 105L70 91Z" fill="${c}"/><path d="M45 92C42 112 78 112 75 92" fill="none" stroke="#4b5563" stroke-width="2.4" stroke-linecap="round"/><circle cx="66" cy="105" r="3.4" fill="#9ca3af" stroke="#4b5563" stroke-width="1.2"/><rect x="82" y="104" width="12" height="6" rx="1.5" fill="#0b9a8f" opacity=".85"/>`;
+  hairFront=f?`<circle cx="60" cy="14.5" r="9.5" fill="${hair}"/><path d="M36.5 48C34 28 46 19 60 19C74 19 86 28 83.5 48C80 38 72 32 60 32C48 32 40 38 36.5 48Z" fill="${hair}"/>`:`<path d="M36.5 47C34 28 46 19 60 19C74 19 86 28 83.5 47C80 38 72 33 60 33C48 33 40 38 36.5 47Z" fill="${hair}"/>`}
+ else if(m===1){body=`<path d="${sh}" fill="#2b7bbd"/><path d="M50 90L60 106L70 90" fill="none" stroke="#1d5a8c" stroke-width="3.4" stroke-linejoin="round"/><path d="M50 91L60 105L70 91Z" fill="${c}"/><rect x="80" y="103" width="13" height="8" rx="2" fill="#1d5a8c" opacity=".7"/>`;
+  hairFront=(f?`<path d="M33.5 50C30 62 31 70 36 75C38 66 38.5 58 38.5 52Z" fill="${hair}"/><path d="M86.5 50C90 62 89 70 84 75C82 66 81.5 58 81.5 52Z" fill="${hair}"/>`:"")+`<path d="M35 47C32.5 26 46 14.5 60 14.5C74 14.5 87.5 26 85 47C80 40 72 36 60 36C48 36 40 40 35 47Z" fill="#3aa0d8"/><path d="M36 41C46 36 74 36 84 41" fill="none" stroke="#2b7bbd" stroke-width="2"/>`}
+ else{body=f?`<path d="${sh}" fill="#8e6bd1"/><path d="M50 90C52 99 68 99 70 90Z" fill="${c}"/><path d="M48 90C52 100 68 100 72 90" fill="none" stroke="#6c4ab0" stroke-width="3" stroke-linecap="round"/>`:`<path d="M30 96C34 80 86 80 90 96L90 100L30 100Z" fill="#b8661c"/><path d="${sh}" fill="#d9822b"/><path d="M48 90C52 102 68 102 72 90Z" fill="${c}"/><path d="M42 91C46 106 74 106 78 91" fill="none" stroke="#b8661c" stroke-width="3.4" stroke-linecap="round"/><path d="M54 100V112M66 100V112" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".85"/>`;
+  hairBack=f?`<path d="M33 54C28 26 44 14 60 14C76 14 92 26 87 54C88 70 90 82 95 94C84 92 78 85 78 74L42 74C42 85 36 92 25 94C30 82 32 68 33 54Z" fill="${hair}"/>`:"";
+  hairFront=f?`<path d="M37 50C36 30 50 20 62 21C76 22 84 32 83 50C76 40 66 34 54 36C46 38 40 42 37 50Z" fill="${hair}"/>`:`<path d="M36 48C33 27 46 17 60 17C74 17 87 27 84 48C80 38 72 31 60 31C48 31 40 38 36 48Z" fill="${hair}"/>`}
+ const face=`<g class="av-eyes"><ellipse cx="49.5" cy="52" rx="2.7" ry="3.3" fill="#1a1412"/><ellipse cx="70.5" cy="52" rx="2.7" ry="3.3" fill="#1a1412"/><circle cx="50.4" cy="50.9" r=".9" fill="#fff"/><circle cx="71.4" cy="50.9" r=".9" fill="#fff"/></g>`+(f?`<path d="M46.6 50.6l-2-1.4M73.4 50.6l2-1.4" stroke="#1a1412" stroke-width="1.4" stroke-linecap="round"/>`:"")+
+  `<path d="M43 44.5Q49 41 55 44.5M65 44.5Q71 41 77 44.5" stroke="${hair}" stroke-width="${f?2:2.6}" fill="none" stroke-linecap="round"/><path d="M60 53Q57.6 60 60.6 60.6" stroke="${d}" stroke-width="1.8" fill="none" stroke-linecap="round" opacity=".75"/><path d="M52.5 66Q60 72.5 67.5 66" stroke="${f?"#7b2a35":"#2a1410"}" stroke-width="2.2" fill="none" stroke-linecap="round"/><ellipse cx="44" cy="62" rx="4.4" ry="2.6" fill="#e0707a" opacity=".16"/><ellipse cx="76" cy="62" rx="4.4" ry="2.6" fill="#e0707a" opacity=".16"/>`;
+ return `<span class="av" style="width:${size}px;height:${size}px;background:${bg}"><svg viewBox="0 0 120 120" width="${size}" height="${size}" aria-hidden="true"><g class="av-body">${body}<path d="M50 72V90C50 96 70 96 70 90V72Z" fill="${d}" opacity="0"/></g><g class="av-head">${hairBack}<circle cx="36.5" cy="53" r="4.6" fill="${c}"/><circle cx="83.5" cy="53" r="4.6" fill="${c}"/><ellipse cx="60" cy="52" rx="23.5" ry="27" fill="${c}"/>${hairFront}${face}</g></svg></span>`}
+/* le cou est dessiné sous la tête : on le place avant le corps pour qu'il reste visible */
+const _fxAv=fxAvatar;
+fxAvatar=function(av,size){av=av||{g:"m",m:0,s:3};const d=fxMix((FX_SKIN[av.s]||FX_SKIN[3])[1],"d",.2);return _fxAv(av,size).replace('<g class="av-body">','<path d="M49 66V92C49 98 71 98 71 92V66Z" fill="'+d+'"/><g class="av-body">')};
+
+/* ---------- sélecteur de profil (nom + avatar) ---------- */
+let fxDraft={g:"f",m:0,s:3};
+function fxPickerHTML(){return `<div class="fx-prev" id="fx-prev"></div><div class="sec">Avatar</div><div class="fx-seg" id="fx-g"><button type="button" onclick="fxSet('g','f')">Féminin</button><button type="button" onclick="fxSet('g','m')">Masculin</button></div><div class="sec">Tenue</div><div class="fx-models" id="fx-m"></div><div class="sec">Carnation</div><div class="fx-skins" id="fx-s"></div>`}
+function fxPickerPaint(){const g=document.getElementById("fx-g");if(!g)return;
+ document.getElementById("fx-prev").innerHTML=fxAvatar(fxDraft,120);
+ [...g.children].forEach((b,n)=>b.classList.toggle("on",fxDraft.g===(n?"m":"f")));
+ document.getElementById("fx-m").innerHTML=FX_MODELS.map((x,n)=>`<button type="button" class="${fxDraft.m===n?"on":""}" onclick="fxSet('m',${n})" aria-label="${x[0]}">${fxAvatar({g:fxDraft.g,m:n,s:fxDraft.s},64)}<small>${x[0]}</small></button>`).join("");
+ document.getElementById("fx-s").innerHTML=FX_SKIN.map((x,n)=>`<button type="button" class="${fxDraft.s===n?"on":""}" onclick="fxSet('s',${n})" aria-label="${x[0]}" title="${x[0]}" style="background:${x[1]}"></button>`).join("")}
+function fxSet(k,v){fxDraft[k]=v;fxPickerPaint()}
+function fxSaveProfile(nameId,onDone){const e=document.getElementById(nameId),v=(e?e.value:"").trim().replace(/\s+/g," "),er=document.getElementById("fx-nerr");
+ if(v.length<2){if(er)er.textContent="Entre ton prénom ou ton nom (2 lettres minimum) pour continuer.";if(e)e.focus();return false}
+ fxProf={name:v.slice(0,24),av:{g:fxDraft.g,m:fxDraft.m,s:fxDraft.s}};uxLS.set("quiz_profile_v1",fxProf);fxHdr();onDone();return true}
+
+/* ---------- en-tête ---------- */
+function fxHdr(){const h=document.getElementById("hdr");if(!h)return;const n=uxDayCount(),un=fxUnread().length;
+ h.innerHTML=`<div class="hl"><button class="fx-hb" onclick="fxDrawer()" aria-label="Ouvrir le menu">${fxIc('<line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/>')}${un?'<i class="fx-pt"></i>':""}</button><button class="hb" onclick="menu()">MON D.E</button></div><div class="hr">${n?`<button class="flame" onclick="fxStatsPage()" title="Jours de révision d'affilée" aria-label="${n} jours de révision d'affilée">${SVG_ICONS.flame}<b>${n}</b></button>`:""}${fxProf?`<button class="fx-me" onclick="fxSettings()" aria-label="Mon profil et paramètres">${fxAvatar(fxProf.av,40)}</button>`:""}</div>`}
+uxHeader=fxHdr;
+
+/* ---------- navigation : historique du téléphone ---------- */
+const FX_PAGES=["menu","subj","qz","oy","oa","om","rn","rnj","uxMarks","uxBadges","uxCards","examSetup","fxPlan","fxStatsPage","fxFind","fxCases","fxBackup","fxNews","fxSettings","fxProfileEdit"];
+const FX_QUIZ=["go","sq","fxSession","fxDefi","fxFlash","fxCasesGo","uxPlayMarks","examStart","draftResume"];
+const FX_NOARG=["menu","qz","uxCards","examSetup","fxCases","fxSettings","fxProfileEdit","fxPlan","fxStatsPage","fxFind","fxBackup","fxNews","rn","oy","uxMarks","uxBadges","fxSession","fxDefi","fxFlash","fxCasesGo","sq","examStart","draftResume","uxPlayMarks"];
+let fxStack=[{n:"menu",a:[],t:"p"}],fxPos=0,fxReplay=false,fxForce=false,fxIgn=false,fxLiveQ=false,fxOv=null,fxPend=null,fxOvIgn=false;
+const fxKey=e=>e.n+(FX_NOARG.includes(e.n)?"":JSON.stringify(e.a));
+function fxNavigate(e){const k=fxKey(e),cur=fxStack[fxPos],prev=fxStack[fxPos-1];
+ if(cur&&fxKey(cur)===k){fxStack[fxPos]=e;try{history.replaceState({p:fxPos},"")}catch(x){}return"render"}
+ if(prev&&fxKey(prev)===k){fxForce=true;history.back();return"wait"}
+ if(e.n==="menu"&&fxPos>0){fxForce=true;history.go(-fxPos);return"wait"}
+ fxStack.length=fxPos+1;fxStack.push(e);fxPos++;try{history.pushState({p:fxPos},"")}catch(x){}return"render"}
+function fxWrap(n,t){const o=window[n];if(typeof o!=="function")return;window[n]=function(){const args=[...arguments];
+ if(fxReplay){fxLiveQ=t==="q";return o.apply(this,args)}
+ const r=fxNavigate({n,a:args,t});if(r==="wait")return;fxLiveQ=t==="q";return o.apply(this,args)}}
+function fxRender(e){fxReplay=true;try{window[e.n].apply(null,e.a)}finally{fxReplay=false}}
+function fxStopExam(){if(typeof examActive!=="undefined"&&examActive){examActive=false;if(examTimer){clearInterval(examTimer);examTimer=null}}}
+function fxQuitAsk(isExam,stay,leave){fxModal("fx-quit",`<h2>${isExam?"Quitter l'examen ?":"Quitter le quiz ?"}</h2><p>${isExam?"Ta tentative sera arrêtée.":"Ta composition en cours est gardée : tu pourras la reprendre depuis l'accueil."}</p><button class="b" id="fx-stay">Rester</button><button class="b g" id="fx-leave">Quitter</button>`);
+ document.getElementById("fx-stay").onclick=()=>{fxModalClose("fx-quit");stay()};document.getElementById("fx-leave").onclick=()=>{fxModalClose("fx-quit");leave()}}
+function fxModal(id,html){fxModalClose(id);document.body.insertAdjacentHTML("beforeend",`<div class="fx-modal" id="${id}" role="dialog" aria-modal="true"><div class="rn-box">${html}</div></div>`)}
+function fxModalClose(id){const e=document.getElementById(id);if(e)e.remove()}
+addEventListener("popstate",e=>{
+ if(fxIgn){fxIgn=false;return}
+ if(fxOv){fxOvHide();fxOv=null;const p=fxPend;fxPend=null;if(p)p();return}
+ if(fxOvIgn){fxOvIgn=false;const p=fxPend;fxPend=null;if(p)p();return}
+ if(e.state&&e.state.ov)return;
+ const p=e.state&&typeof e.state.p==="number"?e.state.p:0;
+ if(p===fxPos&&!fxForce)return;
+ const target=fxStack[p]||fxStack[0],ok=!!fxStack[p];
+ if(!fxForce&&fxLiveQ&&fxStack[fxPos]&&fxStack[fxPos].t==="q"&&p<fxPos){const ex=typeof examActive!=="undefined"&&examActive;
+  fxQuitAsk(ex,()=>{fxIgn=true;history.go(1)},()=>{fxStopExam();fxLiveQ=false;fxPos=ok?p:0;fxRender(target)});return}
+ fxForce=false;fxPos=ok?p:0;fxRender(target)});
+/* surcouches (tiroir, paramètres) : une entrée d'historique, fermées par le bouton retour */
+function fxOvOpen(name,show){if(fxOv)return;fxOv=name;show();try{history.pushState({p:fxPos,ov:1},"")}catch(e){}}
+function fxOvHide(){const d=document.getElementById("fx-dr");if(d)d.classList.remove("open")}
+function fxOvClose(pend){if(!fxOv){if(pend)pend();return}fxOvHide();fxOv=null;fxOvIgn=true;fxPend=pend||null;history.back()}
+
+/* ---------- tiroir ---------- */
+function fxDrawer(){fxOvOpen("drawer",()=>{let d=document.getElementById("fx-dr");if(!d){document.body.insertAdjacentHTML("beforeend",'<div id="fx-dr" aria-hidden="true"><div class="fx-scrim" onclick="fxOvClose()"></div><nav class="fx-panel" aria-label="Menu principal"></nav></div>');d=document.getElementById("fx-dr")}
+ const un=fxUnread().length,P=fxQuota();
+ const it=(f,ic,t,sm)=>`<button class="fx-it" onclick="fxGoTo('${f}')">${ic}<span>${t}${sm||""}</span></button>`;
+ const sec=t=>`<div class="fx-sec">${t}</div>`;
+ d.querySelector(".fx-panel").innerHTML=`<div class="fx-ph">${fxProf?fxAvatar(fxProf.av,52):""}<div><b>${fxProf?fxEsc(fxProf.name):"MON D.E"}</b><small>${fxDays()>0?"J-"+fxDays()+" avant le D.E":"MON D.E"}</small></div><button class="fx-x" onclick="fxOvClose()" aria-label="Fermer le menu">${fxIc('<line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>')}</button></div>`+
+  it("menu()",fxIc('<path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/>'),"Accueil")+
+  sec("Examens")+it("sujets",SVG_ICONS.hospital,"Sujets D.E blanc 2026")+it("oy()",SVG_ICONS.book,"Anciens D.E")+it("rn()",SVG_ICONS.note,"Révision nationale 2025")+
+  sec("Réviser")+it("fxPlan()",SVG_ICONS.cal,"Plan de révision")+it("fxDefi()",fxIc('<circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/>'),"Défi du jour")+it("fxFlash()",fxIc('<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'),"Révision éclair")+it("fxCases()",fxIc('<path d="M3 12h4l3-8 4 16 3-8h4"/>'),"Cas cliniques")+it("fxFind()",SVG_ICONS.search,"Chercher une question")+it("qz()",SVG_ICONS.dice,"Quiz personnalisé")+it("examSetup()",fxIc('<circle cx="12" cy="13" r="8"/><path d="M12 9v4l3 2M9 2h6"/>'),"Examen chronométré")+
+  sec("Mes progrès")+it("fxStatsPage()",SVG_ICONS.chart,"Statistiques")+it("uxBadges()",SVG_ICONS.badge,"Badges et récompenses")+it("uxMarks()",SVG_ICONS.star,"Questions marquées")+it("uxCards(0)",SVG_ICONS.cards,"Fiches formules")+
+  sec("Autres")+it("fxNews()",fxIc('<path d="M4 4h16v16H4z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/>'),"Quoi de neuf",un?` <span class="fx-dot">${un}</span>`:"")+it("fxSettings()",fxIc('<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3h0a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5h0a1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8v0a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>'),"Paramètres");
+ d.classList.add("open");d.setAttribute("aria-hidden","false")})}
+function fxGoTo(f){fxOvClose(()=>{if(f==="sujets"){menu();setTimeout(()=>{const s=[...a.querySelectorAll(".sec")].find(x=>/antenne/i.test(x.textContent));if(s)s.scrollIntoView({behavior:"smooth"})},80)}else(new Function(f))()})}
+addEventListener("keydown",e=>{if(e.key==="Escape"&&fxOv)fxOvClose()});
+
+/* ---------- paramètres et profil ---------- */
+const fxSegHTML=(opts,cur,fn)=>`<div class="fx-seg">${opts.map(o=>`<button type="button" class="${String(cur)===String(o[0])?"on":""}" onclick="${fn}('${o[0]}')">${o[1]}</button>`).join("")}</div>`;
+function fxSetTheme(t){uxApplyTheme(t);fxSettings()}
+function fxSetFs(n){fxFsI=+n;uxLS.set("quiz_fs_v1",fxFsI);fxApplyFs();fxSettings()}
+function fxSetMix(v){uxLS.set("quiz_shuffle_v1",v==="1");fxSettings()}
+function fxSettings(){const st=fxIsInst();
+ a.innerHTML=`<div class="fx-prof">${fxProf?fxAvatar(fxProf.av,72):""}<div><b>${fxProf?fxEsc(fxProf.name):""}</b><button class="lnk" onclick="fxProfileEdit()">Modifier mon profil</button></div></div>`+
+ `<div class="sec">Apparence</div><div class="card"><b>Thème</b>${fxSegHTML([["system","Auto"],["light","Clair"],["dark","Sombre"]],uxTh,"fxSetTheme")}</div><div class="card"><b>Taille du texte</b>${fxSegHTML([[0,"Normal"],[1,"Grand"],[2,"Très grand"]],fxFsI,"fxSetFs")}</div>`+
+ `<div class="sec">Révision</div><div class="card"><b>Mélange des questions et des options</b>${fxSegHTML([["1","Activé"],["0","Désactivé"]],fxShufOn()?"1":"0","fxSetMix")}</div>`+
+ `<div class="sec">Mes données</div><button class="tile row" style="width:100%" onclick="fxBackup()"><span class="e">${fxIc('<path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/>')}</span><span><b>Sauvegarde et restauration</b><small>Exporter ou récupérer ta progression</small></span></button>`+
+ `<div class="sec">Application</div>`+(st?`<div class="card"><b>Application installée</b><div class="sub" style="margin:4px 0 0">MON D.E est sur ton écran d'accueil.</div></div>`:`<button class="tile row" style="width:100%" onclick="fxInstallNow()"><span class="e">${fxIc('<rect x="5" y="2" width="14" height="20" rx="3"/><path d="M12 8v6M9 12l3 3 3-3"/>')}</span><span><b>Installer l'application</b><small>L'ajouter à l'écran d'accueil</small></span></button>`)+
+ `<a class="tile row" style="width:100%;margin-top:10px;text-decoration:none;color:inherit" href="${REPORT_FORM}" target="_blank" rel="noopener noreferrer" onclick="gaTrack('signalement_appli')"><span class="e">${fxIc('<path d="M4 21V4h12l-1.5 4L16 12H4"/>')}</span><span><b>Signaler un problème</b><small>Une erreur ou une idée : écris-nous</small></span></a>`+
+ `<p><button class="b g" onclick="menu()">← Accueil</button></p>`}
+function fxIsInst(){try{return window.fxIsStandalone&&window.fxIsStandalone()}catch(e){return false}}
+function fxProfileEdit(){fxDraft=Object.assign({},fxProf.av);
+ a.innerHTML=`<div class="hero"><div class="tag">Mon profil</div><h1>Ton nom et ton avatar</h1></div><label class="fx-lab">Ton prénom ou ton nom<input id="fx-name2" class="search-box" style="padding-left:14px" maxlength="24" autocomplete="given-name" value="${fxEsc(fxProf.name)}"></label><div id="fx-nerr" class="fx-err" role="alert"></div>`+fxPickerHTML()+`<p><button class="b" onclick="fxSaveProfile('fx-name2',()=>{uxToast('Profil mis à jour');history.back()})">Enregistrer</button><button class="b g" onclick="history.back()">Annuler</button></p>`;fxPickerPaint()}
+
+/* ---------- première ouverture : annonce (anciens) puis profil (tous) ---------- */
+let fxSessionModal=false;
+function fxWizard(){fxSessionModal=true;fxDraft={g:"f",m:0,s:3};
+ document.body.insertAdjacentHTML("beforeend",`<div id="fx-wiz" role="dialog" aria-modal="true" aria-label="Créer ton profil"><div class="fx-wiz-in"><div class="fx-logo">MON D.E</div><h1>Bienvenue !</h1><p class="sub">Dis-nous comment t'appeler et choisis ton avatar. Ces informations restent sur ton téléphone.</p><label class="fx-lab">Ton prénom ou ton nom<input id="fx-name" class="search-box" style="padding-left:14px" maxlength="24" autocomplete="given-name" placeholder="Ex : Marc" oninput="document.getElementById('fx-nerr').textContent=''"></label><div id="fx-nerr" class="fx-err" role="alert"></div>${fxPickerHTML()}<p><button class="b" id="fx-wgo">Commencer</button></p></div></div>`);
+ fxPickerPaint();document.getElementById("fx-wgo").onclick=()=>fxSaveProfile("fx-name",()=>{
+  const t=fxType();uxLS.set("quiz_ui4_seen_v1",true);fxMarkAll();fxHdr();fxModalClose("fx-wiz");const w=document.getElementById("fx-wiz");if(w)w.remove();
+  gaTrack("profil_cree",{type:t});menu();setTimeout(()=>{if(t==="n")fxPopups(true)},900)});
+ document.getElementById("fx-name").addEventListener("keydown",e=>{if(e.key==="Enter")document.getElementById("fx-wgo").click()})}
+function fxAnnounce(){fxSessionModal=true;gaTrack("annonce_interface");
+ fxModal("fx-ann",`<div class="rn-new">NOUVELLE INTERFACE</div><h2>MON D.E a changé</h2><ul class="fx-ul"><li>Le menu ☰ en haut à gauche regroupe toutes les rubriques.</li><li>L'accueil est plus court : ta séance du jour, le défi et les antennes.</li><li>Tu crées ton profil (nom et avatar) : un clic dessus ouvre les paramètres.</li><li>Le bouton retour de ton téléphone revient à la page précédente.</li><li>Ta progression, tes badges et tes erreurs sont conservés.</li></ul><button class="b" id="fx-annok">Compris</button>`);
+ document.getElementById("fx-annok").onclick=()=>{uxLS.set("quiz_ui4_seen_v1",true);fxModalClose("fx-ann");fxWizard()}}
+
+/* ---------- pop-ups : nouveautés et installation ---------- */
+rnPopup=function(){};
+function fxNewsPopup(){const u=fxUnread();if(!u.length)return false;
+ fxModal("rn-pop",`<div class="rn-new">NOUVEAU</div><h2>${u.length>1?"Du nouveau dans l'appli":u[0].t}</h2><p>${u.map(n=>n.t).join(" · ")}</p><button class="b" onclick="rnGo()">Voir les nouveautés</button><button class="b g" onclick="rnLater()">Plus tard</button>`);
+ const e=document.getElementById("rn-pop");if(e)e.className="fx-modal";return true}
+function fxPopups(afterWizard){if(fxSessionModal&&!afterWizard)return;if(document.querySelector(".fx-modal,#fx-wiz")||fxOv)return;
+ const cur=fxStack[fxPos];if(!cur||cur.n!=="menu")return;
+ if(!afterWizard&&fxNewsPopup())return;
+ if(fxType()==="n"&&window.fxInstallOffer)window.fxInstallOffer()}
+
+/* ---------- accueil allégé ---------- */
+const _menuHome=menu;
+menu=function(){_menuHome();fxHomeRework()};
+function fxHomeRework(){
+ ["examSetup()","qz()","oy()","rn()","fxPlan()","fxDefi()","fxFlash()","fxCases()","fxFind()","uxCards(0)","uxBadges()","uxMarks()"].forEach(s=>{const b=a.querySelector('button[onclick="'+s+'"]');if(b)b.remove()});
+ const sb=a.querySelector('button[onclick="fxStatsPage()"]'),g=sb&&sb.closest(".grid");if(g&&g.parentElement===a)g.remove();
+ const h=a.querySelector(".hero");if(h)h.remove();
+ const P=fxQuota(),done=fxDaily[fxToday()]||0,df=fxDefiRes();
+ const dc=[...a.querySelectorAll(".card")].find(c=>/Composition en cours/.test(c.textContent)),cd=a.querySelector(".countdown-banner");
+ const today=`<div class="card fx-today"><b>Aujourd'hui</b><button class="tile row" onclick="fxSession()"><span class="e">${SVG_ICONS.cal.replace('class="icon"','class="icon icon-lg"')}</span><span><b>Séance du jour</b><small>${P.q} questions · ${Math.min(done,P.q)} déjà faites</small></span></button><button class="tile row" onclick="fxDefi()"><span class="e">${fxIc('<circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/>').replace('class="icon"','class="icon icon-lg"')}</span><span><b>Défi du jour</b><small>${df?"Fait : "+df.s+" / "+df.n+" · refais-le ou partage":"10 questions, les mêmes pour tout le monde"}</small></span></button></div>`;
+ const anchor=dc||cd;if(anchor)anchor.insertAdjacentHTML("afterend",today);else a.insertAdjacentHTML("afterbegin",today);
+ a.insertAdjacentHTML("afterbegin",`<div class="fx-hello"><h2>Bonjour ${fxEsc(fxName()||"")} 👋</h2></div>`)}
+
+/* ---------- flamme dans le quiz : une pastille propre, jamais dans l'explication ---------- */
+function fxFlameChip(){a.querySelectorAll(".streak-banner,.fx-qflame").forEach(x=>x.remove());
+ if(!(uxQs>=3)||(typeof examActive!=="undefined"&&examActive))return;const sub=a.querySelector(".sub");if(!sub||!/Question \d+/.test(sub.textContent))return;
+ sub.classList.add("fx-subrow");sub.insertAdjacentHTML("beforeend",`<span class="fx-qflame" aria-label="${uxQs} bonnes réponses d'affilée">${SVG_ICONS.flame}<b>${uxQs}</b></span>`)}
+const _showFlame=show;show=function(){_showFlame();fxFlameChip()};
+const _checkFlame=check;check=function(skip){_checkFlame(skip);fxFlameChip()};
+const _endNav=end;end=function(){fxLiveQ=false;_endNav()};
+const _resNav=examResults;examResults=function(){fxLiveQ=false;_resNav()};
+
+/* ---------- démarrage ---------- */
+FX_PAGES.forEach(n=>fxWrap(n,"p"));FX_QUIZ.forEach(n=>fxWrap(n,"q"));
+try{history.replaceState({p:0},"")}catch(e){}
+setTimeout(()=>{fxHdr();
+ if(!fxProf){fxType();if(fxType()==="o"&&!uxLS.get("quiz_ui4_seen_v1",false))fxAnnounce();else fxWizard();return}
+ fxType();fxPopups(false)},0);
+
 menu();
 </script><aside id="install-offer" role="dialog" aria-label="Installer MON D.E" hidden><div class="io-top"><img src="./icon-192.png" alt=""><div><strong>Installer MON D.E</strong><div>Ajoutez l’application à votre écran d’accueil.</div></div></div><p id="install-help">Accédez à vos sujets plus rapidement, même hors connexion.</p><div class="io-actions"><button id="install-now" type="button">Installer</button><button id="install-later" type="button">Plus tard</button></div></aside><script>
-(()=>{const box=document.getElementById("install-offer"),btn=document.getElementById("install-now"),help=document.getElementById("install-help");let installEvent=null;const ios=/iphone|ipad|ipod/i.test(navigator.userAgent),standalone=window.matchMedia("(display-mode: standalone)").matches||navigator.standalone===true;if(standalone)return;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installEvent=e;btn.textContent="Installer";help.textContent="Accédez à vos sujets plus rapidement, même hors connexion.";box.hidden=false});window.addEventListener("appinstalled",()=>{box.hidden=true});document.getElementById("install-later").addEventListener("click",()=>box.hidden=true);btn.addEventListener("click",async()=>{if(installEvent){installEvent.prompt();await installEvent.userChoice;installEvent=null;box.hidden=true;return}if(ios){help.textContent="Dans Safari, touchez Partager puis « Sur l’écran d’accueil ».";return}help.textContent="Ouvrez le menu de votre navigateur, puis choisissez « Installer l’application » ou « Ajouter à l’écran d’accueil »."});box.hidden=false;if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))})();
+(()=>{const box=document.getElementById("install-offer"),btn=document.getElementById("install-now"),help=document.getElementById("install-help");let evt=null;
+const ios=/iphone|ipad|ipod/i.test(navigator.userAgent),standalone=()=>matchMedia("(display-mode: standalone)").matches||navigator.standalone===true,IK="quiz_install_v1";
+const rd=()=>{try{return JSON.parse(localStorage.getItem(IK)||"{}")}catch(e){return{}}},wr=o=>{try{localStorage.setItem(IK,JSON.stringify(o))}catch(e){}};
+window.fxIsStandalone=standalone;
+const TXT="Accédez à vos sujets plus rapidement, même hors connexion.",HOW=ios?"Dans Safari, touchez Partager puis « Sur l’écran d’accueil ».":"Ouvrez le menu de votre navigateur, puis choisissez « Installer l’application » ou « Ajouter à l’écran d’accueil ».";
+window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();evt=e});
+window.addEventListener("appinstalled",()=>{box.hidden=true;const o=rd();o.d=true;wr(o);evt=null});
+async function go(){if(evt){const e=evt;evt=null;e.prompt();const r=await e.userChoice.catch(()=>({outcome:"dismissed"}));box.hidden=true;if(r.outcome==="accepted"){const o=rd();o.d=true;wr(o)}return}help.textContent=HOW}
+btn.addEventListener("click",go);
+document.getElementById("install-later").addEventListener("click",()=>{box.hidden=true;const o=rd();o.c=(o.c||0)+1;o.t=Date.now();wr(o)});
+window.fxInstallNow=()=>{help.textContent=evt?TXT:HOW;box.hidden=false;if(evt)go()};
+window.fxInstallOffer=()=>{const o=rd();if(standalone()){if(!o.d){o.d=true;wr(o)}return false}if(o.d)return false;const c=o.c||0;if(c>=3||(c>0&&Date.now()-(o.t||0)<3*864e5))return false;help.textContent=TXT;box.hidden=false;return true};
+if("serviceWorker" in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+})();
 </script></body></html>
