@@ -87,6 +87,7 @@ main#a.fade-in{animation:uxIn .22s ease}
 .rn-new,.rn-badge{display:inline-block;background:var(--ac);color:#fff;font-size:11px;font-weight:700;letter-spacing:.5px;padding:2px 8px;border-radius:10px}
 .rn-badge{margin-left:6px;vertical-align:middle}
 .fx-dot{display:inline-block;background:#e74c3c;color:#fff;border-radius:10px;font-size:11px;font-weight:700;padding:1px 7px;margin-left:6px;vertical-align:middle}
+.days{display:flex;align-items:flex-end;gap:8px;min-height:100px}.days div{flex:1;text-align:center;font-size:11px;color:var(--mut)}.days i{display:block;background:var(--ac);border-radius:4px 4px 0 0;margin:2px 0}.sbar{height:10px;background:var(--bd);border-radius:5px;overflow:hidden}.sbar i{display:block;height:100%;background:var(--ac);border-radius:5px}.sbar.low i{background:#e67e22}
 </style></head><body><canvas id="confetti-canvas"></canvas><div id="hdr"></div><main id="a"></main><div id="toast"></div>
 <script>
 const D={am:(()=>{const C1="Élève G.G.D, 16 ans, a eu une aventure sexuelle pendant les vacances. Motif de consultation : brûlure mictionnelle avec dysurie et plaie au niveau du pénis.";
@@ -735,7 +736,7 @@ function uxConfetti(){if(matchMedia("(prefers-reduced-motion: reduce)").matches)
  for(let k=0;k<70;k++)p.push({x:Math.random()*c.width,y:Math.random()*c.height-c.height,z:Math.random()*8+4,c:cols[k%cols.length],v:Math.random()*4+2,r:Math.random()*360,w:Math.random()*8-4});
  let f=0;(function an(){x.clearRect(0,0,c.width,c.height);p.forEach(q=>{q.y+=q.v;q.r+=q.w;x.save();x.translate(q.x,q.y);x.rotate(q.r*Math.PI/180);x.fillStyle=q.c;x.fillRect(-q.z/2,-q.z/2,q.z,q.z);x.restore()});if(++f<140)requestAnimationFrame(an);else x.clearRect(0,0,c.width,c.height)})()}
 /* questions marquées */
-const uxId=q=>q[0]+"|"+q[1].join("|");
+const uxId=q=>q.uid||q[0]+"|"+q[1].join("|");
 function uxAllQ(){const r=[];Object.keys(D).forEach(k=>{const d=D[k];if(!d||!d.Q)return;d.Q.forEach((q,j)=>r.push({k,j,q,f:q[5]!==undefined?q[5]:typeof d.tf=="function"?d.tf(j):j<d.tf}))});return r}
 function uxMarked(){const ids=new Set(uxMk),seen=new Set(),r=[];uxAllQ().forEach(x=>{const id=uxId(x.q);if(ids.has(id)&&!seen.has(id)){seen.add(id);r.push(x)}});return r}
 function uxStar(){const c=a.querySelector(".card");if(!c||!Qs||!Qs[i])return;const on=uxMk.includes(uxId(Qs[i]));
@@ -788,11 +789,11 @@ const DRAFT_KEY="monde_composition_draft_v1";
 let examActive=false,examDuration=30,examTimer=null,examSubject="Médecine",examCount=10,examFinishedAt=0,examPool=[];
 let draftSelection=[];
 function draftRead(){try{return JSON.parse(localStorage.getItem(DRAFT_KEY)||"null")}catch(e){return null}}
-function draftSave(){if(examActive||!Qs||!Qs.length||i>=Qs.length)return;try{const packed=Qs.map((q,j)=>{const z=[...q];z[5]=ft(j);return z});localStorage.setItem(DRAFT_KEY,JSON.stringify({q:packed,t:ttl,i,s,w:W,sel:[...sel||[]]}))}catch(e){}}
+function draftSave(){if(examActive||!Qs||!Qs.length||i>=Qs.length)return;try{const packed=Qs.map((q,j)=>{const z=[...q];z[5]=ft(j);if(q.uid)z[6]=q.uid;return z});localStorage.setItem(DRAFT_KEY,JSON.stringify({q:packed,t:ttl,i,s,w:W,sel:[...sel||[]]}))}catch(e){}}
 function draftClear(){try{localStorage.removeItem(DRAFT_KEY)}catch(e){}}
 function draftReset(){draftClear();i=0;s=0;W=[];if(Qs&&Qs.length)show();else menu()}
 function draftDiscard(){draftClear();Qs=null;W=[];menu()}
-function draftResume(){const d=draftRead();if(!d||!Array.isArray(d.q)||!d.q.length){draftClear();menu();return}examActive=false;Qs=d.q;TF=0;ttl=d.t||"Composition";i=Math.max(0,Math.min(d.i||0,Qs.length-1));s=d.s||0;W=Array.isArray(d.w)?d.w:[];draftSelection=Array.isArray(d.sel)?d.sel:[];show();sel=new Set(draftSelection);a.querySelectorAll(".o").forEach(b=>{if(sel.has(b.dataset.k))b.classList.add("s")});const v=document.getElementById("v");if(v)v.disabled=!sel.size;draftSave()}
+function draftResume(){const d=draftRead();if(!d||!Array.isArray(d.q)||!d.q.length){draftClear();menu();return}examActive=false;Qs=d.q;Qs.forEach(q=>{if(q[6]){q.uid=q[6];q.length=6}});Qs.fxP=true;TF=0;ttl=d.t||"Composition";i=Math.max(0,Math.min(d.i||0,Qs.length-1));s=d.s||0;W=Array.isArray(d.w)?d.w:[];draftSelection=Array.isArray(d.sel)?d.sel:[];show();sel=new Set(draftSelection);a.querySelectorAll(".o").forEach(b=>{if(sel.has(b.dataset.k))b.classList.add("s")});const v=document.getElementById("v");if(v)v.disabled=!sel.size;draftSave()}
 const REPORT_FORM="https://docs.google.com/forms/d/e/1FAIpQLSdPYe0Cw_sI8Htj9ninsfWg_-6C1r3eB1GyfGV0I9dKG8Eqmg/viewform";
 function reportMeta(){let antenne="Toutes les antennes",matiere="";if(examActive){matiere=examSubject;return{antenne,matiere}}if(typeof ttl==="string"&&ttl.startsWith("Quiz · ")){matiere=ttl.slice(7);return{antenne,matiere}}const parts=String(ttl||"").split(" – ");if(/^20\d\d$/.test(parts[0])&&parts.length>=3){antenne=parts[1];matiere=parts.slice(2).join(" – ")}else if(Object.prototype.hasOwnProperty.call(M,parts[0])&&parts.length>=2){antenne=parts[0];matiere=parts.slice(1).join(" – ")}else{for(const year of Object.keys(AN)){for(const city of Object.keys(AN[year])){if(parts[0]===city&&parts.length>=2){antenne=city;matiere=parts.slice(1).join(" – ")}}}}return{antenne,matiere:matiere||String(ttl||"")}}
 function reportUrl(){const meta=reportMeta(),q=Qs&&Qs[i],question=q?((q[4]?q[4]+"\n":"")+q[0]):"";const values=new URLSearchParams({"usp":"pp_url","entry.177902004":meta.antenne,"entry.1251943177":meta.matiere,"entry.1232857201":question,"entry.9635494":""});return REPORT_FORM+"?"+values.toString()}
@@ -837,7 +838,7 @@ const _menuRN=menu;menu=function(){_menuRN();rnClose();
 
 SVG_ICONS.note='<svg class="icon" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>';UXEM["📝"]="note";
 /* ===== Plan de révision, révision éclair, sauvegarde, taille du texte, quoi de neuf ===== */
-const fxId=q=>{const t=q[0]+"|"+q[1].join("|");let h=5381;for(let k=0;k<t.length;k++)h=((h<<5)+h+t.charCodeAt(k))|0;return(h>>>0).toString(36)};
+const fxId=q=>{const t=q.uid||q[0]+"|"+q[1].join("|");let h=5381;for(let k=0;k<t.length;k++)h=((h<<5)+h+t.charCodeAt(k))|0;return(h>>>0).toString(36)};
 let fxErr=uxLS.get("quiz_errors_v1",{}),fxSeenS=new Set(uxLS.get("quiz_seen_v1",[])),fxDaily=uxLS.get("quiz_daily_v1",{}),fxSt=uxLS.get("quiz_stats_v1",{}),fxFsI=uxLS.get("quiz_fs_v1",0);
 let fxIX=null;
 function fxIdx(){if(fxIX)return fxIX;const km={};Object.keys(MAT).filter(m=>!/Toutes/.test(m)).forEach(m=>MAT[m].forEach(k=>km[k]=m));const all=[],seen=new Set();
@@ -852,7 +853,7 @@ function fxRec(q,ok){const u=fxId(q),x=fxIdx().by[u];fxSeenS.add(u);uxLS.set("qu
  if(x&&x.mat){const e=fxSt[x.mat]||[0,0];e[0]++;if(ok)e[1]++;fxSt[x.mat]=e;uxLS.set("quiz_stats_v1",fxSt)}
  if(ok){if(fxErr[u]){delete fxErr[u];uxLS.set("quiz_errors_v1",fxErr)}}else{fxErr[u]=(fxErr[u]||0)+1;uxLS.set("quiz_errors_v1",fxErr)}}
 const _checkFX=check;check=function(skip){const q=Qs&&Qs[i],ok=!skip&&q&&[...sel].sort().join("")===q[2],ex=examActive;_checkFX(skip);if(!ex&&!skip&&q)try{fxRec(q,ok)}catch(e){}};
-function fxPlay(list,title,again2){if(!list.length)return;Qs=list;TF=0;ttl=title;i=0;s=0;W=[];again=again2;pgK=null;pgRec=false;show()}
+function fxPlay(list,title,again2,noShuf){if(!list.length)return;Qs=list;if(noShuf)Qs.fxP=true;TF=0;ttl=title;i=0;s=0;W=[];again=again2;pgK=null;pgRec=false;show()}
 /* plan de révision */
 function fxPick(n,weak){const ix=fxIdx(),units=[];let cur=null;
  ix.all.forEach(x=>{const c=x.q[4];if(c&&cur&&cur.k===x.k&&cur.c===c)cur.m.push(x);else{cur={k:x.k,c:c,m:[x]};units.push(cur)}});
@@ -877,7 +878,7 @@ function fxPlan(){const P=fxQuota(),S=fxStats(),done=fxDaily[fxToday()]||0,dd=fx
 function fxFlash(){const ix=fxIdx(),ids=Object.keys(fxErr).filter(u=>ix.by[u]);if(!ids.length){uxToast("Aucune erreur à réviser pour le moment");return}
  gaTrack("revision_eclair",{erreurs:ids.length});fxPlay(fxShuf(ids).slice(0,5).map(u=>ix.by[u].q),"Révision éclair",fxFlash)}
 /* sauvegarde */
-const FX_KEYS=["monde_progress_v1","quiz_streak_v1","quiz_badges_v1","quiz_marks_v1","quiz_theme_v1","quiz_errors_v1","quiz_seen_v1","quiz_daily_v1","quiz_stats_v1","quiz_news_v1","quiz_rn_visited_v1","quiz_fs_v1"];
+const FX_KEYS=["monde_progress_v1","quiz_streak_v1","quiz_badges_v1","quiz_marks_v1","quiz_theme_v1","quiz_errors_v1","quiz_seen_v1","quiz_daily_v1","quiz_stats_v1","quiz_news_v1","quiz_rn_visited_v1","quiz_fs_v1","quiz_shuffle_v1","quiz_defi_v1"];
 function fxCode(){const o={};FX_KEYS.forEach(k=>{try{const v=localStorage.getItem(k);if(v!==null)o[k]=v}catch(e){}});return"MONDE1:"+btoa(unescape(encodeURIComponent(JSON.stringify(o))))}
 function fxMsg(t,ok){const e=document.getElementById("fx-msg");if(e){e.textContent=t;e.style.color=ok?"var(--ac)":"#c0392b"}}
 function fxCopy(){const c=fxCode();gaTrack("sauvegarde_export",{mode:"copie"});(navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(c):Promise.reject()).then(()=>fxMsg("Code copié. Colle-le dans un message WhatsApp à toi-même.",true)).catch(()=>{const t=document.getElementById("fx-out");t.style.display="block";t.value=c;t.select();fxMsg("Copie le code ci-dessous.",true)})}
@@ -902,6 +903,7 @@ const _hdrFX=uxHeader;uxHeader=function(){_hdrFX();const r=document.querySelecto
 uxHeader();
 /* quoi de neuf */
 const NEWS=[
+{id:"n20261113b",d:"13 novembre 2026",t:"Défi du jour, cas cliniques, statistiques",l:["Défi du jour : 10 questions identiques pour tout le monde, avec partage du score","Cas cliniques : un quiz uniquement sur les études de cas","Chercher une question par mot, avec la réponse et l'explication","Mes statistiques : réussite par matière et activité de la semaine","Mélange des questions et des options, que tu peux désactiver"],go:"fxDefi()",b:"Faire le défi du jour"},
 {id:"n20261113",d:"13 novembre 2026",t:"Nouveaux outils de révision",l:["Plan de révision : combien de questions par jour jusqu'au D.E","Révision éclair : 5 questions tirées de tes erreurs","Sauvegarde : retrouve ta progression sur un autre téléphone","Taille du texte réglable avec le bouton Aa"],go:"fxPlan()",b:"Voir mon plan"},
 {id:"rn2025",d:"12 novembre 2026",t:"Révision nationale 2025",l:["10 journées de révision en ligne, de J1 à J10","Médecine, Pédiatrie, Santé publique et Chirurgie dans chaque journée"],go:"rn()",b:"Ouvrir"}];
 const fxUnread=()=>{const s=uxLS.get("quiz_news_v1",[]);return NEWS.filter(n=>!s.includes(n.id))};
@@ -912,13 +914,63 @@ function rnGo(){rnClose();fxNews()}
 function rnLater(){fxMarkAll();rnClose()}
 function rnPopup(){const u=fxUnread();if(!u.length||document.getElementById("rn-pop"))return;
  document.body.insertAdjacentHTML("beforeend",`<div id="rn-pop" role="dialog" aria-modal="true" aria-label="Nouveautés"><div class="rn-box"><div class="rn-new">NOUVEAU</div><h2>${u.length>1?"Du nouveau dans l'appli":u[0].t}</h2><p>${u.map(n=>n.t).join(" · ")}</p><button class="b" onclick="rnGo()">Voir les nouveautés</button><button class="b g" onclick="rnLater()">Plus tard</button></div></div>`)}
+
+/* ===== v3 : mélange, statistiques, défi du jour, recherche, cas cliniques ===== */
+const fxShufOn=()=>uxLS.get("quiz_shuffle_v1",true)!==false;
+const fxRefOpt=c=>c[1].some(o=>/toutes|aucune|ci-dessus|ci-dessous|les deux|\b[A-F] et [A-F]\b|\b[A-F] ?\+ ?[A-F]\b|^[A-F]\s*[,;]/i.test(o))||/(?:\b[A-F]\s*[=:]|option [A-F]|proposition [A-F]|réponse [A-F]|\b[A-F] (?:et|ou) [A-F]\b)/.test(c[3]||"");
+function fxPrep(arr){
+ const it=arr.map((q,j)=>{const c=q.slice(0,6);while(c.length<5)c.push(null);if(c[4]===undefined)c[4]=null;c[5]=q[5]!==undefined?!!q[5]:!!(typeof TF=="function"?TF(j):j<TF);c.uid=q.uid||(q[0]+"|"+q[1].join("|"));
+  if(!c[5]&&c[1].length>2&&!fxRefOpt(c)){const p=fxShuf(c[1].map((_,n)=>n)),o=c[1];c[1]=p.map(n=>o[n]);c[2]=[...c[2]].map(l=>L[p.indexOf(L.indexOf(l))]).sort().join("")}
+  return c});
+ const last={};it.forEach((c,j)=>{if(c[4])last[c[4]]=j});
+ const g=[];let j=0;while(j<it.length){let e=j;if(it[j][4]){e=last[it[j][4]];for(let t=j;t<=e;t++)if(it[t][4]&&last[it[t][4]]>e)e=last[it[t][4]]}g.push(it.slice(j,e+1));j=e+1}
+ return fxShuf(g).flat()}
+const _showFX=show;show=function(){if(i===0&&!examActive&&Qs&&Qs.length&&!Qs.fxP&&fxShufOn()){const p=fxPrep(Qs);p.fxP=true;Qs=p;TF=0}_showFX()};
+function fxShufTog(){uxLS.set("quiz_shuffle_v1",!fxShufOn());menu()}
+/* unités (une étude de cas reste groupée) */
+function fxUnits(){const units=[];let cur=null;fxIdx().all.forEach(x=>{const c=x.q[4];if(c&&cur&&cur.k===x.k&&cur.c===c)cur.m.push(x);else{cur={k:x.k,c:c,m:[x]};units.push(cur)}});return units}
+/* statistiques */
+function fxStatsPage(){const S=fxStats(),P=fxQuota();let A=0,G=0;Object.values(S.r).forEach(e=>{A+=e.ans;G+=e.good});
+ const days=[];for(let k=6;k>=0;k--){const d=new Date();d.setDate(d.getDate()-k);days.push([d.toLocaleDateString("fr-FR",{weekday:"short"}).slice(0,3),fxDaily[uxYmd(d)]||0])}const mx=Math.max(1,...days.map(x=>x[1]));
+ a.innerHTML=`<div class="hero"><div class="tag">Mes statistiques</div><h1>${A?Math.round(G/A*100)+" % de réussite":"Pas encore de données"}</h1><div>${A?A+" réponses données sur cet appareil.":"Réponds à quelques questions pour voir tes statistiques."}</div></div>`+
+ `<div class="card"><b>En bref</b><div class="sub" style="margin:4px 0">${P.seen} / ${P.tot} questions vues · ${Object.keys(fxErr).length} erreur${Object.keys(fxErr).length>1?"s":""} à revoir · ${uxDayCount()} jour${uxDayCount()>1?"s":""} de révision d'affilée</div></div>`+
+ `<div class="card"><b>7 derniers jours</b><div class="days" style="margin-top:8px">${days.map(x=>`<div><span>${x[1]||""}</span><i style="height:${Math.round(x[1]/mx*70)||2}px"></i>${x[0]}</div>`).join("")}</div></div>`+
+ `<div class="sec">Réussite par matière</div>`+Object.keys(S.r).map(m=>{const e=S.r[m],p=e.ans?Math.round(e.good/e.ans*100):0;return `<div class="card"><b>${m}</b><div class="sub" style="margin:4px 0">${e.ans?p+" % · "+e.good+" bonnes sur "+e.ans:"Pas encore de réponses"}</div><div class="sbar${e.ans&&p<60?" low":""}"><i style="width:${e.ans?p:0}%"></i></div></div>`}).join("")+
+ `<p><button class="b g" onclick="menu()">← Retour</button></p>`}
+/* défi du jour */
+function fxSeed(str){let h=1779033703^str.length;for(let k=0;k<str.length;k++){h=Math.imul(h^str.charCodeAt(k),3432918353);h=h<<13|h>>>19}return()=>{h=Math.imul(h^h>>>16,2246822507);h=Math.imul(h^h>>>13,3266489909);return((h^=h>>>16)>>>0)/4294967296}}
+const fxDefiRes=()=>(uxLS.get("quiz_defi_v1",{})[fxToday()]||null);
+function fxDefi(){const r=fxSeed(fxToday()+"|defi"),u=fxUnits();for(let j=u.length-1;j>0;j--){const k=Math.floor(r()*(j+1));[u[j],u[k]]=[u[k],u[j]]}
+ const out=[];let n=0;for(const x of u){if(n>=10)break;if(n+x.m.length<=10){out.push(...x.m.map(y=>y.q));n+=x.m.length}}
+ gaTrack("defi_du_jour");fxPlay(out,"Défi du jour",fxDefi,true)}
+const _endDefi=end;end=function(){_endDefi();if(ttl!=="Défi du jour"||!Qs||!Qs.length)return;const t=fxToday(),d=uxLS.get("quiz_defi_v1",{});if(!d[t]){d[t]={s:s,n:Qs.length};uxLS.set("quiz_defi_v1",d)}
+ const c=a.querySelector(".card");if(c)c.insertAdjacentHTML("beforeend",`<button class="b" onclick="fxShare()">Partager mon score sur WhatsApp</button>`)};
+function fxShare(){const r=fxDefiRes();if(!r)return;const u=/^https?:/.test(location.href)?location.origin+location.pathname:"",dt=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long"});
+ const t=`Défi du jour MON D.E (${dt}) : ${r.s} / ${r.n}. Les 10 questions sont les mêmes pour tout le monde. À toi de jouer !${u?" "+u:""}`;gaTrack("share",{method:"whatsapp",type:"defi"});window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank")}
+/* recherche dans les questions */
+function fxFind(){gaTrack("recherche_question_ouverte");a.innerHTML=`<div class="hero"><div class="tag">Recherche</div><h1>Chercher une question</h1><div>Tape un mot (par exemple « paludisme ») pour retrouver les questions, les réponses et les explications.</div></div><div class="search-wrapper">${SVG_ICONS.search}<input class="search-box" id="fq" type="search" placeholder="Un mot ou deux" autocomplete="off" oninput="fxFindRun(this.value)"></div><div id="fr"></div><p><button class="b g" onclick="menu()">← Retour</button></p>`;const e=document.getElementById("fq");if(e)e.focus()}
+function fxFindRun(v){const r=document.getElementById("fr");if(!r)return;const w=uxN(v.trim()).split(/\s+/).filter(Boolean);if(!w.length||v.trim().length<3){r.innerHTML="";return}
+ const hit=fxIdx().all.filter(x=>{const q=x.q,h=uxN([q[0],q[1].join(" "),q[3]||"",q[4]||""].join(" "));return w.every(t=>h.includes(t))});
+ r.innerHTML=`<div class="sub">${hit.length} question${hit.length>1?"s":""} trouvée${hit.length>1?"s":""}${hit.length>30?" (30 premières affichées)":""}</div>`+hit.slice(0,30).map(x=>{const q=x.q,tf=q[5],ans=tf?(q[2]==="A"?"Vrai":"Faux"):q[2].split("").map(l=>L[L.indexOf(l)]+". "+q[1][L.indexOf(l)]).join(" ; ");
+  return `<div class="card"><div class="sub" style="margin:0">${x.mat||""}</div>${q[4]?`<div class="ctx">${q[4]}</div>`:""}<b>${q[0]}</b><div style="margin-top:6px"><span class="rn-badge" style="margin:0">RÉPONSE</span> ${ans}</div><div class="ex">${q[3]||""}</div></div>`}).join("")}
+/* cas cliniques */
+let fxCm="Toutes",fxCn=5;
+function fxCaseUnits(m){return fxUnits().filter(u=>u.c&&u.m.length>=2&&(m==="Toutes"||u.m[0].mat===m))}
+function fxCases(){const ms=["Toutes"].concat(Object.keys(MAT).filter(m=>!/Toutes/.test(m))),n=fxCaseUnits(fxCm).length;
+ a.innerHTML=`<div class="hero"><div class="tag">Cas cliniques</div><h1>Études de cas</h1><div>Un énoncé, puis ses questions à la suite. Les cas les plus proches du D.E.</div></div><div class="sec">Matière</div><div class="grid">`+ms.map(m=>`<button class="tile ${fxCm==m?"on":""}" onclick="fxCm='${m}';fxCases()"><span class="e">${m==="Toutes"?SVG_ICONS.dice:SVG_ICONS[uxIc(m)]}</span><b>${m==="Toutes"?"Toutes":m}</b><small>${fxCaseUnits(m).length} cas</small></button>`).join("")+`</div><div class="sec">Nombre de cas</div><div>`+[3,5,8].map(k=>`<button class="b ${fxCn==k?"":"g"}" onclick="fxCn=${k};fxCases()">${k} cas</button>`).join(" ")+`</div><p>${n?`<button class="b" onclick="fxCasesGo()">Commencer (${Math.min(fxCn,n)} cas)</button>`:`<div class="sub">Aucun cas pour cette matière.</div>`}<button class="b g" onclick="menu()">← Retour</button></p>`}
+function fxCasesGo(){const u=fxShuf(fxCaseUnits(fxCm)).slice(0,fxCn);if(!u.length)return;gaTrack("cas_cliniques",{matiere:fxCm,cas:u.length});fxPlay(u.flatMap(x=>x.m.map(y=>y.q)),"Cas cliniques · "+fxCm,fxCasesGo)}
+/* menu */
 const _menuFX=menu;menu=function(){_menuFX();const r=a.querySelector('button[onclick="rn()"]');if(!r)return;
- const ic=p=>`<svg class="icon icon-lg" viewBox="0 0 24 24">${p}</svg>`,n=Object.keys(fxErr).length,P=fxQuota(),un=fxUnread().length;
+ const ic=p=>`<svg class="icon icon-lg" viewBox="0 0 24 24">${p}</svg>`,n=Object.keys(fxErr).length,P=fxQuota(),un=fxUnread().length,df=fxDefiRes();
  const row=(f,i,b,sm)=>`<button class="tile row" style="width:100%;margin-top:10px" onclick="${f}"><span class="e">${i}</span><span><b>${b}</b><small>${sm}</small></span></button>`;
  const tl=(f,i,b,sm)=>`<button class="tile" onclick="${f}"><span class="e">${i}</span><b>${b}</b><small>${sm}</small></button>`;
  r.insertAdjacentHTML("afterend",row("fxPlan()",SVG_ICONS.cal.replace('class="icon"','class="icon icon-lg"'),"Plan de révision",fxDays()>0?"Aujourd'hui : "+P.q+" questions":"Ta séance du jour")+
+  row("fxDefi()",ic('<circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/>'),"Défi du jour",df?"Fait aujourd'hui : "+df.s+" / "+df.n+" · refais-le ou partage":"10 questions, les mêmes pour tout le monde")+
   row("fxFlash()",ic('<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'),"Révision éclair",n?"5 questions tirées de tes "+n+" erreurs":"Aucune erreur à revoir")+
-  `<div class="grid" style="margin-top:10px">`+tl("fxNews()",ic('<path d="M4 4h16v16H4z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/>'),"Quoi de neuf"+(un?` <span class="fx-dot">${un}</span>`:""),"Les nouveautés")+tl("fxBackup()",ic('<path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/>'),"Sauvegarde","Changer de téléphone")+`</div>`)};
+  row("fxCases()",ic('<path d="M3 12h4l3-8 4 16 3-8h4"/>'),"Cas cliniques","Études de cas, énoncé puis questions")+
+  row("fxFind()",SVG_ICONS.search.replace('class="icon"','class="icon icon-lg"'),"Chercher une question","Par mot : réponse et explication")+
+  `<div class="grid" style="margin-top:10px">`+tl("fxStatsPage()",SVG_ICONS.chart.replace('class="icon"','class="icon icon-lg"'),"Mes statistiques","Par matière")+tl("fxShufTog()",SVG_ICONS.dice.replace('class="icon"','class="icon icon-lg"'),"Mélange","Questions et options : "+(fxShufOn()?"oui":"non"))+
+  tl("fxNews()",ic('<path d="M4 4h16v16H4z"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="12" y2="17"/>'),"Quoi de neuf"+(un?` <span class="fx-dot">${un}</span>`:""),"Les nouveautés")+tl("fxBackup()",ic('<path d="M12 3v12"/><polyline points="7 10 12 15 17 10"/><path d="M5 21h14"/>'),"Sauvegarde","Changer de téléphone")+`</div>`)};
 
 menu();
 </script><aside id="install-offer" role="dialog" aria-label="Installer MON D.E" hidden><div class="io-top"><img src="./icon-192.png" alt=""><div><strong>Installer MON D.E</strong><div>Ajoutez l’application à votre écran d’accueil.</div></div></div><p id="install-help">Accédez à vos sujets plus rapidement, même hors connexion.</p><div class="io-actions"><button id="install-now" type="button">Installer</button><button id="install-later" type="button">Plus tard</button></div></aside><script>
