@@ -871,9 +871,9 @@ const rnSeenNews=()=>uxLS.get("quiz_news_v1",[]);
 const rnMarkNews=()=>{const s=rnSeenNews();if(!s.includes(RN_NEWS)){s.push(RN_NEWS);uxLS.set("quiz_news_v1",s)}};
 const rnVisited=()=>uxLS.get("quiz_rn_visited_v1",false);
 function rn(){uxLS.set("quiz_rn_visited_v1",true);rnMarkNews();rnClose();
- a.innerHTML=`<div class="hero"><div class="tag">📝 Révision nationale 2025</div><h1>Choisis la journée</h1><div>10 journées de révision en ligne, avec 4 matières chacune.</div></div><div class="grid">`+Object.keys(RN_DATA).map(j=>`<button class="tile" onclick="rnj('${j}')"><span class="e">📅</span><b>${j.replace("J","Journée ")}</b><small>${RN_DATA[j].length} matières</small></button>`).join("")+`</div><p><button class="b g" onclick="menu()">← Retour</button></p>`}
+ a.innerHTML=`<div class="hero"><div class="tag">📝 Révision nationale 2025</div><h1>Choisis la journée</h1><div>10 journées de révision en ligne, avec 4 matières chacune.</div></div><div class="grid">`+Object.keys(RN_DATA).map(j=>`<button class="tile" onclick="rnj('${j}')"><span class="e">📅</span><b>${j.replace("J","Journée ")}</b><small>${rnpCount(rnpGet(),j)} / ${RN_DATA[j].length} validées${rnpFull(rnpGet(),j)?" ✅":""}</small></button>`).join("")+`</div><p><button class="b g" onclick="menu()">← Retour</button></p>`}
 function rnj(j){
- a.innerHTML=`<div class="hero"><div class="tag">📅 Révision nationale 2025 · ${j}</div><h1>Choisis la matière</h1></div><div class="list">`+RN_DATA[j].map(x=>`<a class="tile row" style="text-decoration:none;color:inherit" href="${x[1]}" target="_blank" rel="noopener noreferrer" onclick="rnOpen('${j}','${x[0]}')"><span class="e">${em(x[0])}</span><span><b>${x[0]}</b><small>Ouvre le formulaire en ligne</small></span></a>`).join("")+`</div><p><button class="b g" onclick="rn()">← Retour</button></p>`}
+ a.innerHTML=`<div class="hero"><div class="tag">📅 Révision nationale 2025 · ${j}</div><h1>Choisis la matière</h1></div><div class="list">`+RN_DATA[j].map(x=>`<a class="tile row" style="text-decoration:none;color:inherit" href="${x[1]}" target="_blank" rel="noopener noreferrer" onclick="rnOpen('${j}','${x[0]}')"><span class="e">${em(x[0])}</span><span><b>${x[0]}</b><small>${(rnpGet().done[j]||{})[x[0]]?"✅ Validée · rouvrir le formulaire":"Ouvre le formulaire en ligne"}</small></span></a>`).join("")+`</div><p><button class="b g" onclick="rn()">← Retour</button></p>`}
 function rnOpen(j,m){gaTrack("revision_nationale_ouverte",{journee:j,matiere:m})}
 function rnClose(){const e=document.getElementById("rn-pop");if(e)e.remove()}
 const _menuRN=menu;menu=function(){_menuRN();rnClose();
@@ -923,7 +923,7 @@ function fxPlan(){const P=fxQuota(),S=fxStats(),done=fxDaily[fxToday()]||0,dd=fx
 function fxFlash(){const ix=fxIdx(),ids=Object.keys(fxErr).filter(u=>ix.by[u]);if(!ids.length){uxToast("Aucune erreur à réviser pour le moment");return}
  gaTrack("revision_eclair",{erreurs:ids.length});fxPlay(fxShuf(ids).slice(0,5).map(u=>ix.by[u].q),"Révision éclair",fxFlash)}
 /* sauvegarde */
-const FX_KEYS=["monde_progress_v1","quiz_streak_v1","quiz_badges_v1","quiz_marks_v1","quiz_theme_v1","quiz_errors_v1","quiz_seen_v1","quiz_daily_v1","quiz_stats_v1","quiz_news_v1","quiz_rn_visited_v1","quiz_fs_v1","quiz_shuffle_v1","quiz_defi_v1","quiz_profile_v1"];
+const FX_KEYS=["monde_progress_v1","quiz_streak_v1","quiz_badges_v1","quiz_marks_v1","quiz_theme_v1","quiz_errors_v1","quiz_seen_v1","quiz_daily_v1","quiz_stats_v1","quiz_news_v1","quiz_rn_visited_v1","quiz_rnplan_v1","quiz_fs_v1","quiz_shuffle_v1","quiz_defi_v1","quiz_profile_v1"];
 function fxCode(){const o={};FX_KEYS.forEach(k=>{try{const v=localStorage.getItem(k);if(v!==null)o[k]=v}catch(e){}});return"MONDE1:"+btoa(unescape(encodeURIComponent(JSON.stringify(o))))}
 function fxMsg(t,ok){const e=document.getElementById("fx-msg");if(e){e.textContent=t;e.style.color=ok?"var(--ac)":"#c0392b"}}
 function fxCopy(){const c=fxCode();gaTrack("sauvegarde_export",{mode:"copie"});(navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(c):Promise.reject()).then(()=>fxMsg("Code copié. Colle-le dans un message WhatsApp à toi-même.",true)).catch(()=>{const t=document.getElementById("fx-out");t.style.display="block";t.value=c;t.select();fxMsg("Copie le code ci-dessous.",true)})}
@@ -1168,6 +1168,43 @@ function fxHomeRework(){
  const today=`<div class="card fx-today"><b>Aujourd'hui</b><button class="tile row" onclick="fxSession()"><span class="e">${SVG_ICONS.cal.replace('class="icon"','class="icon icon-lg"')}</span><span><b>Séance du jour</b><small>${P.q} questions · ${Math.min(done,P.q)} déjà faites</small></span></button><button class="tile row" onclick="fxDefi()"><span class="e">${fxIc('<circle cx="12" cy="8" r="6"/><path d="M8.5 13.5 7 22l5-3 5 3-1.5-8.5"/>').replace('class="icon"','class="icon icon-lg"')}</span><span><b>Défi du jour</b><small>${df?"Fait : "+df.s+" / "+df.n+" · refais-le ou partage":"10 questions, les mêmes pour tout le monde"}</small></span></button></div>`;
  const anchor=dc||cd;if(anchor)anchor.insertAdjacentHTML("afterend",today);else a.insertAdjacentHTML("afterbegin",today);
  a.insertAdjacentHTML("afterbegin",`<div class="fx-hello"><h2>Bonjour ${fxEsc(fxName()||"")} 👋</h2></div>`)}
+
+/* ---------- Révision du jour (programme sur l'accueil) ---------- */
+const RNP_KEY="quiz_rnplan_v1";
+function rnpGet(){const d=uxLS.get(RNP_KEY,null);return d&&typeof d==="object"?d:{done:{},on:{},seen:{},pend:null}}
+function rnpSet(d){uxLS.set(RNP_KEY,d)}
+const rnpDays=()=>Object.keys(RN_DATA);
+const rnpCount=(d,j)=>RN_DATA[j].filter(x=>d.done[j]&&d.done[j][x[0]]).length;
+const rnpFull=(d,j)=>rnpCount(d,j)===RN_DATA[j].length;
+function rnpCur(d){return rnpDays().find(j=>!rnpFull(d,j))||null}
+function rnpDoneToday(d){const t=fxToday();return rnpDays().filter(j=>d.on[j]===t)}
+const _rnOpen0=rnOpen;
+rnOpen=function(j,m){_rnOpen0(j,m);const d=rnpGet();d.pend={j:j,m:m,t:Date.now()};rnpSet(d)};
+function rnpAsk(){if(fxLiveQ||document.getElementById("fx-rnask"))return;const d=rnpGet(),p=d.pend;if(!p)return;
+ if(Date.now()-p.t>2*864e5){d.pend=null;rnpSet(d);return}
+ if(Date.now()-p.t<4000)return;
+ fxModal("fx-rnask",`<h2>${fxEsc(p.j)} · ${fxEsc(p.m)}</h2><p>As-tu terminé et envoyé cette matière ?</p><button class="b" id="rnk-y">Oui, c'est fait</button><button class="b g" id="rnk-n">Pas encore</button>`);
+ document.getElementById("rnk-y").onclick=()=>{fxModalClose("fx-rnask");rnpValid(p.j,p.m)};
+ document.getElementById("rnk-n").onclick=()=>{fxModalClose("fx-rnask");const e=rnpGet();e.pend=null;rnpSet(e);if(typeof menu==="function"&&a.querySelector(".fx-rnp"))rnpRefresh()}}
+function rnpValid(j,m){const d=rnpGet();d.pend=null;d.done[j]=d.done[j]||{};d.done[j][m]=1;const n=rnpCount(d,j),tot=RN_DATA[j].length;
+ if(n===tot)d.on[j]=fxToday();rnpSet(d);gaTrack("rn_matiere_validee",{journee:j,matiere:m});
+ const msg=n===tot?"Super, "+j+" est terminé. Rendez-vous demain pour la suite !":n===2?"Félicitations, tu es en feu ! Continue comme ça, la fin n'est plus loin.":n===tot-1?"Plus qu'une matière pour finir "+j+" !":"Bien joué, "+m+" est validée.";
+ fxModal("fx-rnmsg",`<h2>${n===tot?"Journée terminée":n+" / "+tot+" validées"}</h2><p>${msg}</p><button class="b" id="rnm-ok">OK</button>`);
+ document.getElementById("rnm-ok").onclick=()=>{fxModalClose("fx-rnmsg");rnpRefresh()}}
+function rnpRefresh(){const h=a.querySelector(".fx-rnp"),w=a.querySelector(".fx-rnp-wrap");if(w){w.outerHTML=rnpHtml()}else if(a.querySelector("#rn-days,.rn-days")&&typeof rn==="function"){}
+ }
+function rnpHtml(){const d=rnpGet(),j=rnpCur(d),t=fxToday();
+ if(!j)return `<div class="card fx-rnp fx-rnp-wrap"><b>Révision nationale</b><div class="sub">Les 10 journées sont terminées. Reviens sur n'importe laquelle pour réviser.</div><button class="b g" onclick="rn()">Voir les journées</button></div>`;
+ const doneT=rnpDoneToday(d);
+ if(doneT.length&&rnpCount(d,j)===0&&!(d.on[j]===t))return `<div class="card fx-rnp fx-rnp-wrap"><b>${doneT[doneT.length-1]} terminé aujourd'hui</b><div class="sub">Rendez-vous demain pour ${j}. Tu peux aussi revoir les journées quand tu veux.</div><button class="b g" onclick="rn()">Voir les journées</button></div>`;
+ if(!d.seen[j]){d.seen[j]=t;rnpSet(d)}
+ const late=d.seen[j]<t,n=rnpCount(d,j),tot=RN_DATA[j].length;
+ return `<div class="card fx-rnp fx-rnp-wrap"><b>Révision du jour · ${j}</b><div class="sub">${late?"Tu n'as pas encore terminé "+j+". Termine-le avant d'avancer. ":""}${n} / ${tot} matières validées</div>`+
+ RN_DATA[j].map(x=>{const ok=d.done[j]&&d.done[j][x[0]];return `<a class="tile row" style="text-decoration:none;color:inherit;width:100%;margin-top:8px" href="${x[1]}" target="_blank" rel="noopener noreferrer" onclick="rnOpen('${j}','${x[0]}')"><span class="e">${em(x[0])}</span><span><b>${x[0]}</b><small>${ok?"✅ Validée · rouvrir le formulaire":"À faire · ouvre le formulaire"}</small></span></a>`}).join("")+
+ `<button class="b g" style="margin-top:10px;width:100%" onclick="rn()">Toutes les journées</button></div>`}
+const _menuRnp=menu;menu=function(){_menuRnp();const t=a.querySelector(".fx-today");if(t&&!a.querySelector(".fx-rnp-wrap"))t.insertAdjacentHTML("beforebegin",rnpHtml());rnpAsk()};
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible")setTimeout(rnpAsk,300)});
+window.addEventListener("pageshow",()=>setTimeout(rnpAsk,600));
 
 /* ---------- flamme dans le quiz : une pastille propre, jamais dans l'explication ---------- */
 function fxFlameChip(){a.querySelectorAll(".streak-banner,.fx-qflame").forEach(x=>x.remove());
