@@ -747,13 +747,14 @@ function pgDecorate(){a.querySelectorAll("button.tile").forEach(b=>{const oc=b.g
  if(m=oc.match(/^go\('(\w+)'/)){const e=PG[m[1]];if(e)pgBadge(b,`✅ Meilleur : ${pgF(e.best)} / 20 · ${e.t} fois`)}
  else if(m=oc.match(/^subj\('([^']+)'\)/)){if(M[m[1]])pgGroup(b,M[m[1]].filter(x=>x[1]).map(x=>x[1]))}
  else if(m=oc.match(/^om\('([^']+)','([^']+)'\)/)){if(AN[m[1]]&&AN[m[1]][m[2]])pgGroup(b,AN[m[1]][m[2]].map(x=>x[1]))}
+ else if(m=oc.match(/^rn26j\('([^']+)'\)/)){if(typeof RN26==="object"&&RN26[m[1]])pgGroup(b,RN26[m[1]].map(x=>x[1]))}
  else if(m=oc.match(/^oa\('([^']+)'\)/)){if(AN[m[1]])pgGroup(b,Object.values(AN[m[1]]).flat().map(x=>x[1]))}})}
 function pgCard(armed){const all=pgAll(),done=all.filter(k=>PG[k]),n=done.length;
  const moy=n?done.reduce((t,k)=>t+PG[k].best,0)/n:0;
  return `<div class="card pgc"><div class="sec">📈 Ma progression</div>`+(n?`<div>${n} / ${all.length} sujets terminés</div><div class="bar"><i style="width:${n/all.length*100}%"></i></div><div>Moyenne de tes meilleurs scores : <b>${pgF(moy)} / 20</b></div>`:`<div>Aucun sujet terminé pour l'instant. Va jusqu'au score d'un sujet pour le voir ici.</div>`)+
  `<div class="sub" style="margin:8px 0 0">Enregistré sur cet appareil uniquement.</div>`+(n?`<p style="margin-bottom:0"><button class="b g" id="pgr">${armed?"Confirmer : tout effacer":"Effacer ma progression"}</button></p>`:"")+`</div>`}
 
-["subj","oy","oa","om"].forEach(f=>{const o=window[f];window[f]=function(...r){o(...r);pgDecorate()}});
+["subj","oy","oa","om","rn","rn26j","ent"].forEach(f=>{const o=window[f];window[f]=function(...r){o(...r);pgDecorate()}});
 const _menu=menu;menu=function(){const armed=pgArm;pgArm=false;_menu();pgDecorate();a.insertAdjacentHTML("beforeend",pgCard(armed));const r=document.getElementById("pgr");if(r)r.onclick=()=>{if(armed){PG={};pgSave()}else pgArm=true;menu()}};
 /* ===== Design 2026 : ajouts d'interface, moteur inchangé ===== */
 const DATE_DE="2026-12-11";
@@ -1043,10 +1044,11 @@ const fxDefiRes=()=>(uxLS.get("quiz_defi_v1",{})[fxToday()]||null);
 function fxDefi(){const r=fxSeed(fxToday()+"|defi"),u=fxUnits();for(let j=u.length-1;j>0;j--){const k=Math.floor(r()*(j+1));[u[j],u[k]]=[u[k],u[j]]}
  const out=[];let n=0;for(const x of u){if(n>=10)break;if(n+x.m.length<=10){out.push(...x.m.map(y=>y.q));n+=x.m.length}}
  gaTrack("defi_du_jour");fxPlay(out,"Défi du jour",fxDefi,true)}
-const _endDefi=end;end=function(){_endDefi();if(ttl!=="Défi du jour"||!Qs||!Qs.length)return;const t=fxToday(),d=uxLS.get("quiz_defi_v1",{});if(!d[t]){d[t]={s:s,n:Qs.length};uxLS.set("quiz_defi_v1",d)}
+const _endDefi=end;end=function(){_endDefi();if(ttl!=="Défi du jour"||!Qs||!Qs.length)return;const t=fxToday(),d=uxLS.get("quiz_defi_v1",{});const nw=!d[t];if(nw)d[t]={s:s,n:Qs.length};const e=d[t];e.k=nw?1:(e.k||1)+1;e.l=s;e.b=Math.max(e.b||0,e.s,s);uxLS.set("quiz_defi_v1",d)
  const c=a.querySelector(".card");if(c)c.insertAdjacentHTML("beforeend",`<button class="b" onclick="fxShare()">Partager mon score sur WhatsApp</button>`)};
-function fxShare(){const r=fxDefiRes();if(!r)return;const u=/^https?:/.test(location.href)?location.origin+location.pathname:"",dt=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long"});
- const t=`Défi du jour MON D.E (${dt}) : ${r.s} / ${r.n}. Les 10 questions sont les mêmes pour tout le monde. À toi de jouer !${u?" "+u:""}`;gaTrack("share",{method:"whatsapp",type:"defi"});window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank")}
+function fxShare(){const r=fxDefiRes();if(!r)return;const u=FX_URL,dt=new Date().toLocaleDateString("fr-FR",{day:"numeric",month:"long"});
+ const k=r.k||1,sc=r.l!==undefined?r.l:r.s,ess=k>1?` au ${k}e essai (1er essai : ${r.s} / ${r.n})`:" du premier coup";
+ const t=`Défi du jour MON D.E (${dt}) : ${sc} / ${r.n}${ess}. Les 10 questions sont les mêmes pour tout le monde. À toi de jouer !${u?" "+u:""}`;gaTrack("share",{method:"whatsapp",type:"defi"});window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank")}
 /* recherche dans les questions */
 function fxFind(){gaTrack("recherche_question_ouverte");a.innerHTML=`<div class="hero"><div class="tag">Recherche</div><h1>Chercher une question</h1><div>Tape un mot (par exemple « paludisme ») pour retrouver les questions, les réponses et les explications.</div></div><div class="search-wrapper">${SVG_ICONS.search}<input class="search-box" id="fq" type="search" placeholder="Un mot ou deux" autocomplete="off" oninput="fxFindRun(this.value)"></div><div id="fr"></div><p><button class="b g" onclick="menu()">← Retour</button></p>`;const e=document.getElementById("fq");if(e)e.focus()}
 function fxFindRun(v){const r=document.getElementById("fr");if(!r)return;const w=uxN(v.trim()).split(/\s+/).filter(Boolean);if(!w.length||v.trim().length<3){r.innerHTML="";return}
