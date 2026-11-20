@@ -965,7 +965,7 @@ function fxStats(){const ix=fxIdx(),r={};Object.keys(MAT).filter(m=>!/Toutes/.te
  const q=Object.keys(r).filter(m=>r[m].ans>=10);if(q.length<2)weak=null;return{r,weak}}
 function fxQuota(){const ix=fxIdx(),tot=ix.all.length,seen=ix.all.filter(x=>fxSeenS.has(x.u)).length,left=tot-seen,d=Math.max(1,fxDays());
  return{tot,seen,left,d,q:left>0?Math.min(50,Math.max(10,Math.ceil(left/d))):10}}
-function fxSession(){const{weak}=fxStats(),{q}=fxQuota();gaTrack("seance_du_jour",{questions:q});fxPlay(fxPick(q,weak),"Séance du jour",fxSession)}
+function fxSession(){const{weak}=fxStats(),{q}=fxQuota(),done=fxDaily[fxToday()]||0,n=done>0&&done<q?Math.max(5,q-done):q;gaTrack("seance_du_jour",{questions:n});fxPlay(fxPick(n,weak),"Séance du jour",fxSession)}
 function fxPlan(){const P=fxQuota(),S=fxStats(),done=fxDaily[fxToday()]||0,dd=fxDays(),pct=Math.min(100,done/P.q*100);gaTrack("plan_revision_ouvert");
  a.innerHTML=`<div class="hero"><div class="tag">Plan de révision</div><h1>${dd>0?"J-"+dd+" avant le D.E":dd===0?"C'est aujourd'hui !":"Le D.E est passé"}</h1><div>${P.left>0?"Pour tout voir avant le D.E : "+Math.ceil(P.left/Math.max(1,dd))+" questions par jour"+(Math.ceil(P.left/Math.max(1,dd))>100?" (la séance du jour est limitée à 100)":"")+".":"Tu as vu toutes les questions. Continue avec la révision éclair."}</div></div>`+
  `<div class="card"><b>Aujourd'hui</b><div class="sub" style="margin:4px 0">${done} / ${P.q} questions</div><div class="bar"><i style="width:${pct}%"></i></div><button class="b" onclick="fxSession()">Commencer la séance (${P.q} questions)</button></div>`+
@@ -1289,7 +1289,8 @@ function fxHomeV2(){if(!a.querySelector(".fx-hello")||a.querySelector(".fx-sj"))
  const til=(f,c,i,t,sm)=>`<button class="fx-st ${c}" onclick="${f}"><span class="fx-sti">${i}</span><b>${t}</b><small>${sm}</small></button>`;
  const kpi=(f,n,t,c)=>`<button class="fx-k${c?" "+c:""}" onclick="${f}"><b>${n}</b><small>${t}</small></button>`;
  const known=new Set([hello,cd,rnp,today,grid,pgc,q(".search-wrapper"),q("#sr")]);[...a.querySelectorAll(":scope>.sec")].forEach(x=>known.add(x));
- const extra=[...a.children].filter(x=>!known.has(x));
+ let dr=null;try{dr=draftRead()}catch(e){}const ds=!!(dr&&dr.t==="Séance du jour"&&Array.isArray(dr.q)&&dr.i<dr.q.length);
+ const extra=[...a.children].filter(x=>!known.has(x)&&!(ds&&/Composition en cours · Séance du jour/.test(x.textContent)));
  const h=document.createElement("div");
  h.innerHTML=`<div class="fx-s1"></div>`+
   `<div class="fx-lbl">S'entraîner sur un sujet</div><div class="fx-sj">${til("fxSujets()","c1",SVG_ICONS.hospital,"D.E blanc 2026",`${nA} antennes`)}${til("rn()","c2",SVG_ICONS.note,"Révision nationale",nJ?`J1 à J${nJ}`:"Par journée")}${til("oy()","c3",SVG_ICONS.book,"Anciens D.E","Années passées")}</div>`+
@@ -1302,7 +1303,7 @@ function fxHomeV2(){if(!a.querySelector(".fx-hello")||a.querySelector(".fx-sj"))
  if(today){s1.replaceWith(today);const m=today.querySelector('.tile[onclick="fxSession()"]');let tot=50,done=0;
   if(m){const t=m.textContent,x=t.match(/(\d+)\s*questions/),y=t.match(/(\d+)\s*déjà/);if(x)tot=+x[1];if(y)done=+y[1];m.remove()}
   const pc=Math.min(100,Math.round(done/Math.max(1,tot)*100)),fin=done>=tot;
-  today.insertAdjacentHTML("afterbegin",`<div class="fx-hero"><div class="fx-ring" style="--p:${pc}"><b>${done}</b><small>/ ${tot}</small></div><div class="fx-ht"><small>Aujourd'hui</small><b>Séance du jour</b><span>${fin?"Bravo, séance terminée ! Tu peux en refaire une.":done?"Encore "+(tot-done)+" questions pour finir.":tot+" questions choisies pour toi."}</span></div><button class="fx-go" onclick="fxSession()">${fin?"Encore":done?"Continuer":"Commencer"}</button></div>`)}
+  today.insertAdjacentHTML("afterbegin",`<div class="fx-hero"><div class="fx-ring" style="--p:${pc}"><b>${done}</b><small>/ ${tot}</small></div><div class="fx-ht"><small>Aujourd'hui</small><b>Séance du jour</b><span>${ds?"Reprends à la question "+(dr.i+1)+" sur "+dr.q.length+".":fin?"Bravo, objectif du jour atteint ! Tu peux en refaire une.":done?"Encore "+(tot-done)+" questions pour ton objectif du jour.":tot+" questions choisies pour toi."}</span></div><button class="fx-go" onclick="${ds?"draftResume()":"fxSession()"}">${ds?"Reprendre":fin?"Encore":done?"Continuer":"Commencer"}</button></div>`)}
  else s1.remove();
  if(rnp){const t=(rnp.querySelector("b")||{}).textContent||"Révision nationale",u=(rnp.querySelector(".sub")||{}).textContent||"",d=document.createElement("details");d.className="fx-rnd";
   d.innerHTML=`<summary>${ic(SVG_ICONS.note)}<span><b>${fxEsc(t.replace("Révision du jour","Révision nationale 2025"))}</b><small>${fxEsc(u.split(".").pop().trim()||u)}</small></span></summary>`;d.append(rnp);(today||a.querySelector(".fx-pr")).append(d)}
